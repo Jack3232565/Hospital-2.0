@@ -1,0 +1,11 @@
+paso 1 :  creación de Nuevo Repositorio en GitHub.
+
+Crear repositorio llamado Hospital 2.0
+
+paso 2 : abril la carperta en visual studio, instalar en terminar con git bash
+
+git init
+git add README.md
+git commit -m "Inicio del Proyecto"
+git remote add origin https://github.com/Jack3232565/Hospital-2.0.git
+git push -u origin master
