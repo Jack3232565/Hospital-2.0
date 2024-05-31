@@ -1,13 +1,17 @@
 <template>
 
 <div class="py-16">
-    <div class="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
-        <div class="hidden lg:block lg:w-1/2 bg-cover"
-            style="background-image:url('https://images.unsplash.com/photo-1546514714-df0ccc50d7bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=667&q=80')">
+    <div class="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-6xl">
+        <div class="hidden lg:flex lg:w-1/2 bg-cover h-full">
+            <v-container fluid class="flex justify-center items-center h-full">
+                <img src="../assets/img/Login-hospital.webp" alt="" class="max-w-full max-h-full object-contain">
+            </v-container>          
         </div>
         <div class="w-full p-8 lg:w-1/2">
-            <h2 class="text-2xl font-semibold text-gray-700 text-center">Hospital General Hopital Care</h2>
-            <p class="text-xl text-gray-600 text-center">Bienvenido!</p>
+            <v-container>
+                <img src="../assets/img/Logo propuesto Hospital 1.png" alt="">
+            </v-container>   
+            <!-- <p class="text-xl text-gray-600 text-center">Bienvenido!</p> -->
             <a href="#" class="flex items-center justify-center mt-4 text-white rounded-lg shadow-md hover:bg-gray-100">
                 <div class="px-4 py-3">
                     <svg class="h-6 w-6" viewBox="0 0 40 40">
@@ -39,12 +43,17 @@
             <div class="mt-4">
                 <div class="flex justify-between">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                    <a href="#" class="text-xs text-gray-500">Olvde mi Password?</a>
+                    <RouterLink to="/recupera">
+                        <a class="text-xs text-gray-500">Olvde mi Password?</a>
+                    </RouterLink>
+   
                 </div>
                 <input class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password" />
             </div>
             <div class="mt-8">
-                <button class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Login</button>
+                <RouterLink to="/dashboart">
+                <button class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Entrar</button>
+                </RouterLink>
             </div>
 
 

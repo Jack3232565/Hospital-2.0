@@ -6,39 +6,90 @@
           <p class="text-xl text-gray-600 text-center">Registrate</p>
           
           <form @submit.prevent="register">
-            <div class="mt-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
-              <input v-model="form.nombre" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text" required />
-            </div>
-            
-            <div class="mt-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2">Apellido Paterno</label>
-              <input v-model="form.apellidoPaterno" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text" required />
-            </div>
-            
-            <div class="mt-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2">Apellido Materno</label>
-              <input v-model="form.apellidoMaterno" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text" required />
-            </div>
-            
-            <div class="mt-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2">Correo</label>
-              <input v-model="form.correo" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="email" required />
-            </div>
-            
-            <div class="mt-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2">Contraseña</label>
-              <input v-model="form.contraseña" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password" required />
-            </div>
-            
-            <div class="mt-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2">Repite Contraseña</label>
-              <input v-model="form.repiteContraseña" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password" required />
-            </div>
-            
+            <!-- <div class="w-full p-8 lg:w-1/2"> -->
+                <div class="mt-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
+                  <input v-model="form.nombre" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text" required />
+                </div>
+                
+                <div class="mt-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2">Apellido Paterno</label>
+                  <input v-model="form.apellidoPaterno" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text" required />
+                </div>
+                
+                <div class="mt-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2">Apellido Materno</label>
+                  <input v-model="form.apellidoMaterno" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text" required />
+                </div>
+
+                <div class="mt-4">
+                  <label for="genero" class="block text-gray-700 text-sm font-bold mb-2">Selecciona un Genero</label>
+                  <select id="genero" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" >
+                    <option selected>----- Selecciona tu Genero ----- </option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                  </select>
+                </div>
+
+                <div class="mt-4">
+                  <label for="sangre" class="block text-gray-700 text-sm font-bold mb-2">Selecciona tu tipo de Sangre</label>
+                  <select id="sangre" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" >
+                    <option selected> ---- Selecciona tu tipo de Sangre --- </option>
+                    <option value="A+">A+</option>
+                    <option value="O-">O-</option>
+                    <option value="B+">B+</option>
+                    <option value="AB+">AB+</option>
+                    <option value="A-">A-</option>
+                    <option value="O-">O-</option>
+                    <option value="B-">B+</option>
+                    <option value="AB-">AB-</option>
+                  </select>
+                </div>
+                
+                <div class="mt-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2">CURP</label>
+                  <input v-model="form.CURP" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text" required />
+                </div>
+            <!-- </div> -->
+
+            <!-- <div class="w-full p-8 lg:w-1/2"> -->
+              <div class="mt-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Telefono</label>
+                <input v-model="form.Telefono" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text" required />
+              </div>
+
+              <div class="mt-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Fecha de Nacimiento</label>
+                <input v-model="form.FechaNacimiento" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="date" required />
+              </div>
+
+              
+              
+              <div class="mt-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Correo</label>
+                <input v-model="form.correo" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="email" required />
+              </div>
+              
+              <div class="mt-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Usuario</label>
+                <input v-model="form.Usuario" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text" required />
+              </div>
+
+              <div class="mt-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Contraseña</label>
+                <input v-model="form.contraseña" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password" required />
+              </div>
+              
+              <div class="mt-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Repite Contraseña</label>
+                <input v-model="form.repiteContraseña" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password" required />
+              </div>
+            <!-- </div>  -->
             <div class="mt-8">
               <button type="submit" class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Registrar</button>
             </div>
+            
+
           </form>
           
           <div class="mt-8 flex items-center justify-between">
@@ -51,6 +102,9 @@
         </div>
       </div>
     </div>
+
+
+    
   </template>
   
   <script>
