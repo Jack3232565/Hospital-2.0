@@ -23,13 +23,13 @@
               <li>
                 <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
                   <img src="../assets/img/Organizacion.webp" alt="Descripción de la imagen" width="25" height="40" class="mr-2">
-                  Organización
+                  Estructura O. H.
                 </a>
               </li>
               <li>
                 <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
                   <img src="../assets/img/Graficos.webp" alt="Descripción de la imagen" width="25" height="40" class="mr-2">
-                  Estadísticas
+                  Datos Estadísticos
                 </a>
               </li>
               <li>
@@ -48,9 +48,12 @@
               Recursos Humanos
             </a>
             <ul v-show="menus.hr" class="submenu ml-8">
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 1</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 2</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 3</a></li>
+              <RouterLink to="/personas">
+                <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Personas</a></li>
+              </RouterLink>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Personal Medico</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Horarios</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Puestos</a></li>
             </ul>
           </div>
 
@@ -61,9 +64,9 @@
               Registros Médico
             </a>
             <ul v-show="menus.rmedicos" class="submenu ml-8">
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 1</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 2</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 3</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Citas</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Expediente Medico</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Receta Médica</a></li>
             </ul>
           </div>
 
@@ -74,9 +77,8 @@
               Pediatria
             </a>
             <ul v-show="menus.pediatria" class="submenu ml-8">
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 1</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 2</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 3</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Nacimientos</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Desarrollo Infantil</a></li>
             </ul>
           </div>
 
@@ -87,9 +89,10 @@
               Farmacia
             </a>
             <ul v-show="menus.farmacia" class="submenu ml-8">
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 1</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 2</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 3</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Consumibles</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Medicamentos</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Lote Medicamento</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Dispensación</a></li>
             </ul>
           </div>
 
@@ -100,9 +103,8 @@
               Estudios Clinicos
             </a>
             <ul v-show="menus.eclinico" class="submenu ml-8">
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 1</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 2</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 3</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Estudios</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Rsultado de Estudios</a></li>
             </ul>
           </div>
 
@@ -113,9 +115,9 @@
               Transplante
             </a>
             <ul v-show="menus.transplante" class="submenu ml-8">
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 1</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 2</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 3</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Solicitud de Transplante</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Organos</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Detalle Organo</a></li>
             </ul>
           </div>
 
@@ -123,12 +125,11 @@
           <div class="menu-item">
             <a href="#" @click.prevent="toggleMenu('cirugia')" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
               <img src="../assets/img/Cirugia.webp" alt="Descripción de la imagen" width="35" height="50" class="mr-2">
-              Cirugía
+              Programacion Quirugica
             </a>
             <ul v-show="menus.cirugia" class="submenu ml-8">
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 1</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 2</a></li>
-              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Opción 3</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Cirugia</a></li>
+              <li><a href="#" class="block px-4 py-2 text-gray-100 hover:bg-gray-700">Calendario de Cirugia</a></li>
             </ul>
           </div>
           <!-- Cerrar Sesión -->
@@ -163,16 +164,40 @@
           </button>
         </div>
       </div>
+      
       <div class="p-4">
         <h1 class="text-2xl font-bold">Dirección General Hospitalaria</h1>
         <p class="mt-2 text-gray-600">Descripcion Princial.</p>
       </div>
+
+      
+      
+      <div class=" ">
+        <Personas></Personas>  <!-- Renderiza la vista basada en la ruta activa -->
+      </div>
+
+      <div class="flex flex-col flex-1 overflow-y-auto">
+        <Usuarios></Usuarios>  <!-- Renderiza la vista basada en la ruta activa -->
+      </div>
+
+
     </div>
   </div>
 </template>
 
+
+
 <script>
+import Personas from './Personas.vue'  
+import Usuarios from './Usuarios.vue'
+
 export default {
+
+   components: {
+    Personas,
+    Usuarios
+  },
+
   data() {
     return {
       menus: {
@@ -188,6 +213,8 @@ export default {
       }
     };
   },
+
+
   methods: {
     toggleMenu(menu) {
       // Cerrar todas las secciones del menú
