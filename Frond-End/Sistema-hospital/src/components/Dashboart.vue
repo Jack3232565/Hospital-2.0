@@ -165,20 +165,13 @@
         </div>
       </div>
       
-      <div class="p-4">
+      <!-- <div class="p-4">
         <h1 class="text-2xl font-bold">Dirección General Hospitalaria</h1>
         <p class="mt-2 text-gray-600">Descripcion Princial.</p>
-      </div>
+      </div> -->
 
-      
-      
-      <div class=" ">
-        <Personas></Personas>  <!-- Renderiza la vista basada en la ruta activa -->
-      </div>
-
-      <div class="flex flex-col flex-1 overflow-y-auto">
-        <Usuarios></Usuarios>  <!-- Renderiza la vista basada en la ruta activa -->
-      </div>
+      <!-- importa los componentes al la vista del Dashboart -->
+      <router-view></router-view> 
 
 
     </div>
@@ -188,14 +181,13 @@
 
 
 <script>
-import Personas from './Personas.vue'  
-import Usuarios from './Usuarios.vue'
+import { RouterLink } from 'vue-router';
 
 export default {
 
    components: {
-    Personas,
-    Usuarios
+    RouterLink,
+
   },
 
   data() {
