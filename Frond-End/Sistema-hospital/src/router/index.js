@@ -7,6 +7,10 @@ import RecuperaPass from '../components/recuperaPasword.vue'
 import Dashboart from '../components/Dashboart.vue'
 import Personas from '../components/Personas.vue'
 import Usuarios from '../components/Usuarios.vue'
+import Estadisticas from '../components/DatosEstadisticos.vue'
+import EstructuraOrg from '../components/EstrucuturaOH.vue'
+import AprobacionSM from '../components/AprobacionSM.vue'
+import Bitacora from '../components/Bitacora.vue'
 
 
 const router = createRouter({
@@ -37,10 +41,25 @@ const router = createRouter({
             component: Personas 
           },
           {
-            path: '/usuario',
-            name: 'usuario',
-            component: Usuarios
-          }
+            path: '/estadisticas',
+            name: 'estadisticas',
+            component: Estadisticas
+          },
+          {
+            path: '/estrucuturaOr',
+            name: 'estrucuturaOr',
+            component: EstructuraOrg
+          },
+          {
+            path: '/aprobacionSM',
+            name: 'aprobacionSM',
+            component: AprobacionSM
+          },
+          {
+            path: '/bitacora',
+            name: 'bitacora',
+            component: Bitacora
+          },
           ]
     },
  ]
