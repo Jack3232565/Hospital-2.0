@@ -52,8 +52,8 @@
               <table class="table table-bordered mt-2 table-hover">
                 <thead >
                   <tr class="text-center">
-                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left" >--</th>
-                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Servicio Solicitado</th>
+                    <th scope="col" >No°</th>
+                    <th scope="col" >Servicio Solicitado</th>
                     <th scope="col">Departamento Solicitante</th>
                     <th scope="col">Fecha de Solicitud</th>
                     <th scope="col">Estatus</th>
@@ -1163,7 +1163,7 @@
             <div v-if=" Object.keys(this.currentSolicitud).length !== 0
             "
           >
-            <h2 class="alert alert-warning" role="alert">
+            <h2 class="alert alert-warning" role="alert"  >
               Actualiza Solicitud
             </h2>
       
@@ -1175,7 +1175,7 @@
               <div class="row">
                 <div class="col">
                   <div class="form-group">
-                    <label class="form-label float-left ml-2"
+                    <label class="form-label float-left ml-2" scope="col" 
                       >Servicio</label
                     >
                     <select

@@ -125,58 +125,42 @@
                     <td>{{ bitacora.nombre_tabla }}</td>
                     <td>{{ bitacora.usuario }}</td>
                     <td>
-                      <div
-                        v-if="bitacora.operacion === 'Insert'"
-                        class="text-center"
-                      >
+                      <div v-if="bitacora.operacion === 'Insert'" class="text-center">
                         <a class="iq-icons-list" target="_self">
-                          <div
-                            data-icon="S"
-                            class="icon"
-                            style="color: green"
-                          ></div>
+                          <div class="icon" style="color: green">
+                            <i class="fas fa-plus-circle"></i>
+                          </div>
                           <span style="color: green">Agregado</span>
                         </a>
                       </div>
-                      <div
-                        v-else-if="bitacora.operacion === 'Update'"
-                        class="text-center"
-                      >
+                      
+                      <div v-else-if="bitacora.operacion === 'Update'" class="text-center">
                         <a class="iq-icons-list" target="_self">
-                          <div
-                            data-icon="Z"
-                            class="icon"
-                            style="color: orange"
-                          ></div>
-                          <span style="color: orange">Actulizado</span>
+                          <div class="icon" style="color: orange">
+                            <i class="fas fa-edit"></i>
+                          </div>
+                          <span style="color: orange">Actualizado</span>
                         </a>
                       </div>
-                      <div
-                        v-else-if="bitacora.operacion === 'Delete'"
-                        class="text-center"
-                      >
+                      
+                      <div v-else-if="bitacora.operacion === 'Delete'" class="text-center">
                         <a class="iq-icons-list" target="_self">
-                          <div
-                            data-icon="&#xe053;"
-                            class="icon"
-                            style="color: red"
-                          ></div>
+                          <div class="icon" style="color: red">
+                            <i class="fas fa-trash"></i>
+                          </div>
                           <span style="color: red">Eliminado</span>
                         </a>
                       </div>
-                      <div
-                        v-else-if="bitacora.operacion === 'Read'"
-                        class="text-center"
-                      >
+                      
+                      <div v-else-if="bitacora.operacion === 'Read'" class="text-center">
                         <a class="iq-icons-list" href="#" target="_self">
-                          <div
-                            data-icon="("
-                            class="icon"
-                            style="color: black"
-                          ></div>
+                          <div class="icon" style="color: black">
+                            <i class="fas fa-eye"></i>
+                          </div>
                           <span style="color: black">Lectura</span>
                         </a>
                       </div>
+                      
                       <div v-else class="col-12 col-md-6 col-lg-3">
                         {{ bitacora.operacion }}
                       </div>
