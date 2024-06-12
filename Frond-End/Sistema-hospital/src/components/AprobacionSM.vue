@@ -1,1367 +1,1328 @@
 <template>
 
-
-  <div class="container mx-auto"> 
-    <h3 style="text-align: center">
+  <div style="background-color: red;">
+    <h1>hola</h1>
+  </div>
+  <div class="container-fluid"> 
+    <h1 style="text-align: center;">
       Operaciones CRUD de Solicitudes de Procedimientos Clínicos
       y Quirúrgicos
-    </h3>
+    </h1>
     <br>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      
-      <div class="md:col-span-1">
-        <h2 class="alert alert-primary text-center">
-          Lista de Solicitudes
-        </h2>
+    <b-row>
+      <b-col>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+          <div class="md:col-span-3">
+            <h2 class="alert alert-primary text-center">
+              Lista de Solicitudes
+            </h2>
 
-        <!-- buscador de la tabla   -->
-        <nav class="navbar navbar-expand-lg navbar-light p-0">
-          <div class="iq-search-bar">
-            <form action="#" class="searchbox">
-              <input
-                type="text"
-                class="text search-input"
-                title="searchField"
-                placeholder="Buscar"
-                v-model="searchInput"
-              />
-            </form>
-          </div>
-          <b-navbar-toggle target="nav">
-            <i class="ri-menu-3-line"></i>
-          </b-navbar-toggle>
-          <div class="iq-menu-bt align-self-center">
-            <div class="wrapper-menu" @click="miniSidebar">
-              <div class="main-circle">
-                <i class="ri-more-fill"></i>
-              </div>
-              <div class="hover-circle">
-                <i class="ri-more-2-fill"></i>
-              </div>
-            </div>
-          </div>
-          <b-collapse id="nav-collapse" is-nav>
-            <slot name="responsiveRight" />
-          </b-collapse>
-          <slot name="right" />
-        </nav>
-
-        <table
-        class="table table-bordered mt-4 table-hover"
-      >
-        <thead>
-          <tr class="text-center">
-            <th scope="col">N°</th>
-            <th scope="col">Servicio Solicitado</th>
-            <th scope="col">Departamento Solicitante</th>
-            <th scope="col">Fecha de Solicitud</th>
-            <th scope="col">Estatus</th>
-            <th scope="col">Comentario</th>
-            <th scope="col">Fecha de Aprobación</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="(solicitud, id) in paginatedData"
-            :key="id"
-            class="text-center"
-          >
-            <td>{{ solicitud.id }}</td>
-            <td class="text-center">
-              <div
-                v-if="solicitud.servicio_paciente === 1"
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/1.- Urgencias.png"
-                  alt="Urgencias Icono"
-                  width="32"
-                  height="32"
-                />
-                <h5>Urgencias</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 2
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/2.- Consulta Externa.png"
-                  alt="Consulta Externa"
-                  width="32"
-                  height="32"
-                />
-                <h5>Consulta Externa</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 3
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/3.- Hospitalización.png"
-                  alt="Hospitalización"
-                  width="32"
-                  height="32"
-                />
-                <h5>Hospitalización</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 4
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/4.- Cirugia.png"
-                  alt="Cirugia"
-                  width="32"
-                  height="32"
-                />
-                <h5>Cirugía</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 5
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/5.- Laboratorio Clínico.png"
-                  alt="Laboratorio Clínico"
-                  width="32"
-                  height="32"
-                />
-                <h5>Laboratorio Clínico</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 6
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/6.- Radiología.png"
-                  alt="Radiología"
-                  width="32"
-                  height="32"
-                />
-                <h5>Radiología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 7
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/7.- Farmacia.png"
-                  alt="Farmacia"
-                  width="32"
-                  height="32"
-                />
-                <h5>Farmacia</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 8
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/8.- Rehabilitación.png"
-                  alt="Rehabilitación"
-                  width="32"
-                  height="32"
-                />
-                <h5>Rehabilitación</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 9
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/9.- Cuidados Intensivos.png"
-                  alt="Cuidados Intensivos"
-                  width="32"
-                  height="32"
-                />
-                <h5>Cuidados Intensivos</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 10
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/10.- Atención Pediática.png"
-                  alt="Atención Pediática"
-                  width="32"
-                  height="32"
-                />
-                <h5>Atención Pediática</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 11
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/11.- Atencion Materno-Infantil.png"
-                  alt="Atencion Materno-Infantil"
-                  width="32"
-                  height="32"
-                />
-                <h5>Atención Materno-Infantil</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 12
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/12.- Atencion Geriatrica.png"
-                  alt="Atencion Geriatrica"
-                  width="32"
-                  height="32"
-                />
-                <h5>Atención Geriatríca</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 13
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/13.- Psiquiatria y Salud Mental.png"
-                  alt="Psiquiatria y Salud Mental"
-                  width="32"
-                  height="32"
-                />
-                <h5>Psiquiatría y Salud Mental</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 14
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/14.- Banco de Sangre.png"
-                  alt="Banco de Sangre"
-                  width="32"
-                  height="32"
-                />
-                <h5>Banco de Sangre</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 15
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/15.- Ginecologia y Obstetricia.png"
-                  alt="Ginecologia y Obstetricia"
-                  width="32"
-                  height="32"
-                />
-                <h5>Ginecología y Obstétricia</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 16
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/16.- Quirofano.png"
-                  alt="Quirofano"
-                  width="32"
-                  height="32"
-                />
-                <h5>Quirófano</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 17
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/17.- Tanatologia.png"
-                  alt="Tanatologia"
-                  width="32"
-                  height="32"
-                />
-                <h5>Tanatología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 18
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/18.- Infectología.png"
-                  alt="Infectología"
-                  width="32"
-                  height="32"
-                />
-                <h5>Infectología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 19
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/19.- Cardiología.png"
-                  alt="Cardiología"
-                  width="32"
-                  height="32"
-                />
-                <h5>Cardiología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 20
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/20.- Neurología.png"
-                  alt="Neurología"
-                  width="32"
-                  height="32"
-                />
-                <h5>Neurología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 21
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/21.- Endocrinología.png"
-                  alt="Endocrinología"
-                  width="32"
-                  height="32"
-                />
-                <h5>Endocrinología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 22
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/22.- Oftamología.png"
-                  alt="Oftamología"
-                  width="32"
-                  height="32"
-                />
-                <h5>Oftamología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 23
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/23.- Otorrinología.png"
-                  alt="Otorrinología"
-                  width="32"
-                  height="32"
-                />
-                <h5>Otorrinología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 24
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/24.- Gastroenterología.png"
-                  alt="Gastroenterología"
-                  width="32"
-                  height="32"
-                />
-                <h5>Gastroenterología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 25
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/25.- Nefrología.png"
-                  alt="Nefrología"
-                  width="32"
-                  height="32"
-                />
-                <h5>Nefrología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 26
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/26.- Dermatología.png"
-                  alt="Dermatología"
-                  width="32"
-                  height="32"
-                />
-                <h5>Dermatología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 27
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/27.- Hematología.png"
-                  alt="Hematología"
-                  width="32"
-                  height="32"
-                />
-                <h5>Hematología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 28
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/28.- Oncología.png"
-                  alt="Oncología"
-                  width="32"
-                  height="32"
-                />
-                <h5>Oncología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 29
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/29.- Alergología e Inmunología.png"
-                  alt="Alergología e Inmunología"
-                  width="32"
-                  height="32"
-                />
-                <h5>Alergología e Inmunología</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 30
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/30.- Medicina Física y Rehabilitación.png"
-                  alt="Medicina Física y Rehabilitación"
-                  width="32"
-                  height="32"
-                />
-                <h5>Medicina Física y Rehabilitación</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 31
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/31.- Medicina Interna.png"
-                  alt="Medicina Interna"
-                  width="32"
-                  height="32"
-                />
-                <h5>Medicina Interna</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.servicio_paciente === 32
-                "
-              >
-                <img
-                  src="../../assets/images/Servicios Medicos/32.- Medicina Preventiva y Salud Pública.png"
-                  alt="Medicina Preventiva y Salud Pública.png"
-                  width="32"
-                  height="32"
-                />
-                <h5>
-                  Medicina Preventiva y Salud Pública
-                </h5>
-              </div>
-              <div
-                v-else
-                class="col-12 col-md-6 col-lg-3"
-              >
-                {{ solicitud.servicio_paciente }}
-              </div>
-            </td>
-            <td>
-              <div
-                v-if="
-                  solicitud.departamento_solicitante === 1
-                "
-              >
-                <h5>Dirección General</h5>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante === 2
-                "
-              >
-                <span>Junta de Gobierno</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante === 3
-                "
-              >
-                <span>Comités Hospitalarios</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante === 4
-                "
-              >
-                <span>Comiés de Transplantes</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante === 5
-                "
-              >
-                <span>Departamento de Calidad</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante === 6
-                "
-              >
-                <span>Autenticacion a Quejas</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante === 7
-                "
-              >
-                <span>Seguridad paciente</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante === 8
-                "
-              >
-                <span>Programacion Quirurgica</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante === 9
-                "
-              >
-                <span>Sub - Dirección Medica</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  10
-                "
-              >
-                <span>Sub - Administrativa</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  11
-                "
-              >
-                <span>División de Medicina Interna</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  12
-                "
-              >
-                <span>División de Pediatía</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  13
-                "
-              >
-                <span>Servicio de Traumatología</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  14
-                "
-              >
-                <span>División de Cirugía</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  15
-                "
-              >
-                <span>Servicio de Urgencias Adultos</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  16
-                "
-              >
-                <span>Quirófano</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  17
-                "
-              >
-                <span>Terapia Intensiva</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  18
-                "
-              >
-                <span>Quirófano y Anestesiología</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  19
-                "
-              >
-                <span>Terapia Intermedia</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  20
-                "
-              >
-                <span>Centro de Mezclas</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  21
-                "
-              >
-                <span>Radiología e imagen</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  22
-                "
-              >
-                <span>Genética</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  23
-                "
-              >
-                <span
-                  >Laboratorio de Análisis Clinicos</span
-                >
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  24
-                "
-              >
-                <span>Hemodialisis</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  25
-                "
-              >
-                <span>Laboratorio de Patología</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  26
-                "
-              >
-                <span>Rehabilitación Pulmonar</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  27
-                "
-              >
-                <span>Medicina Genómica</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  28
-                "
-              >
-                <span>Banco de Sangre</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  29
-                "
-              >
-                <span
-                  >Laboratorio Histocompatibilidad</span
-                >
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  30
-                "
-              >
-                <span>Aféresis</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  31
-                "
-              >
-                <span>Tele-Robotica</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  32
-                "
-              >
-                <span>Jefatura de Enseñanza Médica</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  33
-                "
-              >
-                <span>Ética e Investigacion</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  34
-                "
-              >
-                <span>Consulta Externa</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  35
-                "
-              >
-                <span
-                  >Terapia y Rehabilitacion Fisica</span
-                >
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  36
-                "
-              >
-                <span>Medicina Legal</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  37
-                "
-              >
-                <span>Trabajo Social</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  38
-                "
-              >
-                <span>UVEH</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  39
-                "
-              >
-                <span>CIES</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  40
-                "
-              >
-                <span>Comunicacion Social</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  41
-                "
-              >
-                <span>Violencia Intrafamiliar</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  42
-                "
-              >
-                <span>Jefatura de Enfermeria</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  43
-                "
-              >
-                <span>Sub-jefatura de Enfermeria</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  44
-                "
-              >
-                <span>Supervisoras de Turno</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  45
-                "
-              >
-                <span
-                  >Coordinación Enseñanza Enfermeria</span
-                >
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  46
-                "
-              >
-                <span>Jefas de Servicio</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  47
-                "
-              >
-                <span>Clinicas y Programas</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  48
-                "
-              >
-                <span>Recursos Humanos</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  49
-                "
-              >
-                <span>Dietética</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  50
-                "
-              >
-                <span>Farmacia Intrahospitalaria</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  51
-                "
-              >
-                <span
-                  >Coordinación de Asuntos Jurídicos y
-                  Administrativos</span
-                >
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  52
-                "
-              >
-                <span
-                  >Biomédica, Conservación y
-                  Mantenimiento</span
-                >
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  53
-                "
-              >
-                <span>Validación</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  54
-                "
-              >
-                <span>Recursos Materiales</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  55
-                "
-              >
-                <span>Servicios Generales</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  56
-                "
-              >
-                <span>Recursos Financieros</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  57
-                "
-              >
-                <span
-                  >Departamento Adtvo. Hemodinamia</span
-                >
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  58
-                "
-              >
-                <span>Relaciones Públicas</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  59
-                "
-              >
-                <span>Farmacia HGC Seguro Popular</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  60
-                "
-              >
-                <span>Enlace Administrativo</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  61
-                "
-              >
-                <span>Informatica</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  62
-                "
-              >
-                <span>Registros Médicos</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  63
-                "
-              >
-                <span>Archivo y Correspondencia</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  64
-                "
-              >
-                <span>Almacen</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  65
-                "
-              >
-                <span>Hemodialisis</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  66
-                "
-              >
-                <span>Insumos Especializados</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  67
-                "
-              >
-                <span>Intendencia</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  68
-                "
-              >
-                <span>Ropería</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  69
-                "
-              >
-                <span>Nivel 7</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  70
-                "
-              >
-                <span>Control Gastos Catastroficos</span>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.departamento_solicitante ===
-                  71
-                "
-              >
-                <span>Tecnologia en la Salud</span>
-              </div>
-              <div
-                v-else
-                class="col-12 col-md-6 col-lg-3"
-              >
-                {{ solicitud.departamento_solicitante }}
-              </div>
-            </td>
-            <td>
-              {{
-                formatearFecha(solicitud.fecha_solicitud)
-              }}
-            </td>
-            <td>
-              <div
-                v-if="solicitud.estatus === 'Aprobado'"
-                class="text-center"
-              >
-                <a
-                  class="iq-icons-list"
-                  href="#"
-                  target="_self"
-                >
-                  <div
-                    data-icon="S"
-                    class="icon"
-                    style="color: green"
-                  ></div>
-                  <span style="color: green"
-                    >Aprobado</span
-                  >
-                </a>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.estatus === 'En Proceso'
-                "
-                class="text-center"
-              >
-                <a
-                  class="iq-icons-list"
-                  href="#"
-                  target="_self"
-                >
-                  <div
-                    data-icon="Y"
-                    class="icon"
-                    style="color: orange"
-                  ></div>
-                  <span style="color: orange"
-                    >En Proceso</span
-                  >
-                </a>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.estatus === 'No Aprobado'
-                "
-                class="text-center"
-              >
-                <a
-                  class="iq-icons-list"
-                  href="#"
-                  target="_self"
-                >
-                  <div
-                    data-icon="&#xe04d;"
-                    class="icon"
-                    style="color: red"
-                  ></div>
-                  <span style="color: red"
-                    >No Aprobado</span
-                  >
-                </a>
-              </div>
-              <div
-                v-else-if="
-                  solicitud.estatus === 'Cancelado'
-                "
-                class="text-center"
-              >
-                <a
-                  class="iq-icons-list"
-                  href="#"
-                  target="_self"
-                >
-                  <div
-                    data-icon=")"
-                    class="icon"
-                    style="color: black"
-                  ></div>
-                  <span style="color: black"
-                    >Cancelado</span
-                  >
-                </a>
-              </div>
-              <div
-                v-else
-                class="col-12 col-md-6 col-lg-3"
-              >
-                {{ solicitud.estatus }}
-              </div>
-            </td>
-            <td>{{ solicitud.comentarios }}</td>
-            <td>
-              {{
-                formatearFecha(solicitud.fecha_aprobacion)
-              }}
-            </td>
-            <td>
-              <a href="#" class="edit" title="">
-                <button
-                  class="btn btn-warning btn-sm"
-                  @click.prevent="editBtn(solicitud.id)"
-                >
-                  Edita
-                </button>
-              </a>
-              <a href="#" class="edit" title="">
-                <button
-                  class="btn btn-danger btn-sm"
-                  @click.prevent="
-                    deleteSolicitud(solicitud.id)
-                  "
-                >
-                  Elimina
-                </button>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      </div>
-
-
-                          <!-- Edicion de la Solicitudes -->
-      <div class="col-md-8">
-        <div v-if="Object.keys(this.currentsolicitud).length !== 0">
-          <h2 class="alert alert-warning" role="alert">
-            Actualiza Solicitud
-          </h2>
-          <form @submit.prevent="updatesolicitud(currentsolicitud.id)">
-
-            <!-- Opciones de Actualización -->
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label class="form-label float-left ml-2"
-                    >Servicio</label
-                  >
-                  <select
-                    class="form-control"
-                    v-model="
-                      currentSolicitud.servicio_paciente
-                    "
-                  >
-                    <option value="1">Urgencias</option>
-                    <option value="2">
-                      Consulta Externa
-                    </option>
-                    <option value="3">Hospitalización</option>
-                    <option value="4">Cirugia</option>
-                    <option value="5">Laboratorio Clínico</option>
-                    <option value="6">Radiología</option>
-                    <option value="7">Farmacia</option>
-                    <option value="8">Rehabilitación</option>
-                    <option value="9">Cuidados Intensivos</option>
-                    <option value="10">Atención Pediática</option>
-                    <option value="11">Atencion Materno-Infantil</option>
-                    <option value="12">Atencion Geriatrica</option>
-                    <option value="13">Psiquiatria y Salud Mental</option>
-                    <option value="14">Banco de Sangre</option>
-                    <option value="15">Ginecologia y Obstetricia</option>
-                    <option value="16">Quirofano</option>
-                    <option value="17">Tanatologia</option>
-                    <option value="18">Infectología</option>
-                    <option value="19">Cardiología</option>
-                    <option value="20">Neurología</option>
-                    <option value="21">Endocrinología</option>
-                    <option value="22">Oftamología</option>
-                    <option value="23">Otorrinología</option>
-                    <option value="24">Gastroenterología</option>
-                    <option value="25">Nefrología</option>
-                    <option value="26">Dermatología</option>
-                    <option value="27">Hematología</option>
-                    <option value="28">Oncología</option>
-                    <option value="29">Alergología e Inmunología</option>
-                    <option value="30">Medicina Física y Rehabilitación</option>
-                    <option value="31">Medicina Interna</option>
-                    <option value="32">Medicina Preventiva y Salud Pública</option>
-                  </select>
+            <!-- buscador de la tabla   -->
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+              <div class="iq-search-bar">
+                <form action="#" class="searchbox">
+                  <input
+                    type="text"
+                    class="text search-input"
+                    title="searchField"
+                    placeholder="Buscar"
+                    v-model="searchInput"
+                  />
+                </form>
+              </div>
+              <b-navbar-toggle target="nav">
+                <i class="ri-menu-3-line"></i>
+              </b-navbar-toggle>
+              <div class="iq-menu-bt align-self-center">
+                <div class="wrapper-menu" @click="miniSidebar">
+                  <div class="main-circle">
+                    <i class="ri-more-fill"></i>
+                  </div>
+                  <div class="hover-circle">
+                    <i class="ri-more-2-fill"></i>
+                  </div>
                 </div>
               </div>
+              <b-collapse id="nav-collapse" is-nav>
+                <slot name="responsiveRight" />
+              </b-collapse>
+              <slot name="right" />
+            </nav>
+            <div class="table-responsive">
+              <table class="table table-bordered mt-2 table-hover">
+                <thead >
+                  <tr class="text-center">
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left" >--</th>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Servicio Solicitado</th>
+                    <th scope="col">Departamento Solicitante</th>
+                    <th scope="col">Fecha de Solicitud</th>
+                    <th scope="col">Estatus</th>
+                    <th scope="col">Comentario</th>
+                    <th scope="col">Fecha de Aprobación</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="(solicitud, id) in paginatedData"
+                    :key="id"
+                    class="text-center"
+                  >
+                    <td>{{ solicitud.id }}</td>
+                    <td class="text-center px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <div v-if="solicitud.servicio_paciente === 1" class="text-center">
+                        <img
+                          class="mx-auto"
+                          src="../assets/img/Servicios Medicos/1.- Urgencias.png"
+                          alt="Urgencias Icono"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Urgencias</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 2
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/2.- Consulta Externa.png"
+                          alt="Consulta Externa"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Consulta Externa</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 3
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/3.- Hospitalización.png"
+                          alt="Hospitalización"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Hospitalización</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 4
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/4.- Cirugia.png"
+                          alt="Cirugia"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Cirugía</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 5
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/5.- Laboratorio Clínico.png"
+                          alt="Laboratorio Clínico"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Laboratorio Clínico</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 6
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/6.- Radiología.png"
+                          alt="Radiología"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Radiología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 7
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/7.- Farmacia.png"
+                          alt="Farmacia"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Farmacia</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 8
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/8.- Rehabilitación.png"
+                          alt="Rehabilitación"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Rehabilitación</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 9
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/9.- Cuidados Intensivos.png"
+                          alt="Cuidados Intensivos"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Cuidados Intensivos</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 10
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/10.- Atención Pediática.png"
+                          alt="Atención Pediática"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Atención Pediática</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 11
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/11.- Atencion Materno-Infantil.png"
+                          alt="Atencion Materno-Infantil"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Atención Materno-Infantil</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 12
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/12.- Atencion Geriatrica.png"
+                          alt="Atencion Geriatrica"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Atención Geriatríca</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 13
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/13.- Psiquiatria y Salud Mental.png"
+                          alt="Psiquiatria y Salud Mental"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Psiquiatría y Salud Mental</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 14
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/14.- Banco de Sangre.png"
+                          alt="Banco de Sangre"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Banco de Sangre</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 15
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/15.- Ginecologia y Obstetricia.png"
+                          alt="Ginecologia y Obstetricia"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Ginecología y Obstétricia</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 16
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/16.- Quirofano.png"
+                          alt="Quirofano"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Quirófano</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 17
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/17.- Tanatologia.png"
+                          alt="Tanatologia"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Tanatología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 18
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/18.- Infectología.png"
+                          alt="Infectología"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Infectología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 19
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/19.- Cardiología.png"
+                          alt="Cardiología"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Cardiología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 20
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/20.- Neurología.png"
+                          alt="Neurología"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Neurología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 21
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/21.- Endocrinología.png"
+                          alt="Endocrinología"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Endocrinología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 22
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/22.- Oftamología.png"
+                          alt="Oftamología"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Oftamología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 23
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/23.- Otorrinología.png"
+                          alt="Otorrinología"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Otorrinología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 24
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/24.- Gastroenterología.png"
+                          alt="Gastroenterología"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Gastroenterología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 25
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/25.- Nefrología.png"
+                          alt="Nefrología"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Nefrología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 26
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/26.- Dermatología.png"
+                          alt="Dermatología"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Dermatología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 27
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/27.- Hematología.png"
+                          alt="Hematología"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Hematología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 28
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/28.- Oncología.png"
+                          alt="Oncología"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Oncología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 29
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/29.- Alergología e Inmunología.png"
+                          alt="Alergología e Inmunología"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Alergología e Inmunología</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 30
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/30.- Medicina Física y Rehabilitación.png"
+                          alt="Medicina Física y Rehabilitación"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Medicina Física y Rehabilitación</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 31
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/31.- Medicina Interna.png"
+                          alt="Medicina Interna"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">Medicina Interna</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.servicio_paciente === 32
+                        "
+                      >
+                        <img class="mx-auto"
+                          src="../assets/img/Servicios Medicos/32.- Medicina Preventiva y Salud Pública.png"
+                          alt="Medicina Preventiva y Salud Pública.png"
+                          width="32"
+                          height="32"
+                        />
+                        <h5 class="text-sm">
+                          Medicina Preventiva y Salud Pública
+                        </h5>
+                      </div>
+                      <div
+                        v-else
+                        class="col-12 col-md-6 col-lg-3"
+                      >
+                        {{ solicitud.servicio_paciente }}
+                      </div>
+                    </td>
+                    <td>
+                      <div
+                        v-if="
+                          solicitud.departamento_solicitante === 1
+                        "
+                      >
+                        <h5 class="text-sm ">Dirección General</h5>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante === 2
+                        "
+                      >
+                        <span class="text-sm">Junta de Gobierno</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante === 3
+                        "
+                      >
+                        <span class="text-sm">Comités Hospitalarios</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante === 4
+                        "
+                      >
+                        <span class="text-sm">Comiés de Transplantes</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante === 5
+                        "
+                      >
+                        <span class="text-sm">Departamento de Calidad</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante === 6
+                        "
+                      >
+                        <span class="text-sm">Autenticacion a Quejas</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante === 7
+                        "
+                      >
+                        <span class="text-sm">Seguridad paciente</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante === 8
+                        "
+                      > 
+                        <span class="text-sm">Programacion Quirurgica</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante === 9
+                        "
+                      >
+                        <span class="text-sm">Sub - Dirección Medica</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          10
+                        "
+                      >
+                        <span class="text-sm">Sub - Administrativa</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          11
+                        "
+                      >
+                        <span class="text-sm">División de Medicina Interna</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          12
+                        "
+                      >
+                        <span class="text-sm">División de Pediatía</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          13
+                        "
+                      >
+                        <span class="text-sm">Servicio de Traumatología</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          14
+                        "
+                      >
+                        <span class="text-sm">División de Cirugía</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          15
+                        "
+                      >
+                        <span class="text-sm">Servicio de Urgencias Adultos</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          16
+                        "
+                      >
+                        <span class="text-sm">Quirófano</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          17
+                        "
+                      >
+                        <span class="text-sm">Terapia Intensiva</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          18
+                        "
+                      >
+                        <span class="text-sm">Quirófano y Anestesiología</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          19
+                        "
+                      >
+                        <span class="text-sm">Terapia Intermedia</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          20
+                        "
+                      >
+                        <span class="text-sm">Centro de Mezclas</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          21
+                        "
+                      >
+                        <span class="text-sm">Radiología e imagen</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          22
+                        "
+                      >
+                        <span class="text-sm">Genética</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          23
+                        "
+                      >
+                        <span class="text-sm"
+                          >Laboratorio de Análisis Clinicos</span
+                        >
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          24
+                        "
+                      >
+                        <span class="text-sm">Hemodialisis</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          25
+                        "
+                      >
+                        <span class="text-sm">Laboratorio de Patología</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          26
+                        "
+                      >
+                        <span class="text-sm">Rehabilitación Pulmonar</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          27
+                        "
+                      >
+                        <span class="text-sm">Medicina Genómica</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          28
+                        "
+                      >
+                        <span class="text-sm">Banco de Sangre</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          29
+                        "
+                      >
+                        <span class="text-sm"
+                          >Laboratorio Histocompatibilidad</span
+                        >
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          30
+                        "
+                      >
+                        <span class="text-sm">Aféresis</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          31
+                        "
+                      >
+                        <span class="text-sm">Tele-Robotica</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          32
+                        "
+                      >
+                        <span class="text-sm">Jefatura de Enseñanza Médica</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          33
+                        "
+                      >
+                        <span class="text-sm">Ética e Investigacion</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          34
+                        "
+                      >
+                        <span class="text-sm">Consulta Externa</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          35
+                        "
+                      >
+                        <span class="text-sm"
+                          >Terapia y Rehabilitacion Fisica</span
+                        >
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          36
+                        "
+                      >
+                        <span class="text-sm">Medicina Legal</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          37
+                        "
+                      >
+                        <span class="text-sm">Trabajo Social</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          38
+                        "
+                      >
+                        <span class="text-sm">UVEH</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          39
+                        "
+                      >
+                        <span class="text-sm">CIES</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          40
+                        "
+                      >
+                        <span class="text-sm">Comunicacion Social</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          41
+                        "
+                      >
+                        <span class="text-sm">Violencia Intrafamiliar</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          42
+                        "
+                      >
+                        <span class="text-sm">Jefatura de Enfermeria</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          43
+                        "
+                      >
+                        <span class="text-sm">Sub-jefatura de Enfermeria</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          44
+                        "
+                      >
+                        <span class="text-sm">Supervisoras de Turno</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          45
+                        "
+                      >
+                        <span class="text-sm"
+                          >Coordinación Enseñanza Enfermeria</span
+                        >
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          46
+                        "
+                      >
+                        <span class="text-sm">Jefas de Servicio</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          47
+                        "
+                      >
+                        <span class="text-sm">Clinicas y Programas</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          48
+                        "
+                      >
+                        <span class="text-sm">Recursos Humanos</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          49
+                        "
+                      >
+                        <span class="text-sm">Dietética</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          50
+                        "
+                      >
+                        <span class="text-sm">Farmacia Intrahospitalaria</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          51
+                        "
+                      > 
+                        <span class="text-sm"
+                          >Coordinación de Asuntos Jurídicos y
+                          Administrativos</span
+                        >
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          52
+                        "
+                      >
+                        <span class="text-sm"
+                          >Biomédica, Conservación y
+                          Mantenimiento</span
+                        >
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          53
+                        "
+                      >
+                        <span class="text-sm">Validación</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          54
+                        "
+                      >
+                        <span class="text-sm">Recursos Materiales</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          55
+                        "
+                      >
+                        <span class="text-sm">Servicios Generales</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          56
+                        "
+                      >
+                        <span class="text-sm">Recursos Financieros</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          57
+                        "
+                      >
+                        <span class="text-sm"
+                          >Departamento Adtvo. Hemodinamia</span
+                        >
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          58
+                        "
+                      >
+                        <span class="text-sm">Relaciones Públicas</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          59
+                        "
+                      >
+                        <span class="text-sm">Farmacia HGC Seguro Popular</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          60
+                        "
+                      >
+                        <span class="text-sm">Enlace Administrativo</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          61
+                        "
+                      >
+                        <span class="text-sm">Informatica</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          62
+                        "
+                      >
+                        <span class="text-sm">Registros Médicos</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          63
+                        "
+                      >
+                        <span class="text-sm">Archivo y Correspondencia</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          64
+                        "
+                      >
+                        <span class="text-sm">Almacen</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          65
+                        "
+                      >
+                        <span class="text-sm">Hemodialisis</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          66
+                        "
+                      >
+                        <span class="text-sm">Insumos Especializados</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          67
+                        "
+                      >
+                        <span class="text-sm">Intendencia</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          68
+                        "
+                      >
+                        <span class="text-sm">Ropería</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          69
+                        "
+                      >
+                        <span class="text-sm">Nivel 7</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          70
+                        "
+                      >
+                        <span class="text-sm">Control Gastos Catastroficos</span>
+                      </div>
+                      <div
+                        v-else-if="
+                          solicitud.departamento_solicitante ===
+                          71
+                        "
+                      >
+                        <span class="text-sm">Tecnologia en la Salud</span>
+                      </div>
+                      <div
+                        v-else
+                        class="col-12 col-md-6 col-lg-3"
+                      >
+                        {{ solicitud.departamento_solicitante }}
+                      </div>
+                    </td>
+                    <td class="text-sm">
+                      {{
+                        formatearFecha(solicitud.fecha_solicitud)
+                      }}
+                    </td>
+                    <td>
+                      <div v-if="solicitud.estatus === 'Aprobado'" class="text-center">
+                        <a class="iq-icons-list" href="#" target="_self">
+                          <div class="icon" style="color: green">
+                            <i class="fa fa-check"></i> <!-- Usando FontAwesome icon para Aprobado -->
+                          </div>
+                          <span style="color: green" class="text-sm">Aprobado</span>
+                        </a>
+                      </div>
+                      <div v-else-if="solicitud.estatus === 'En Proceso'" class="text-center">
+                        <a class="iq-icons-list" href="#" target="_self">
+                          <div class="icon" style="color: orange">
+                            <i class="fa fa-spinner fa-spin"></i> <!-- Usando FontAwesome icon -->
+                          </div>
+                          <span style="color: orange">En Proceso</span>
+                        </a>
+                      </div>
+                      <div v-else-if="solicitud.estatus === 'No Aprobado'" class="text-center">
+                        <a class="iq-icons-list" href="#" target="_self">
+                          <div class="icon" style="color: red">
+                            <i class="fa fa-times"></i> <!-- Usando FontAwesome icon para No Aprobado -->
+                          </div>
+                          <span style="color: red" class="text-sm">No Aprobado</span>
+                        </a>
+                      </div>
+                      <div v-else-if="solicitud.estatus === 'Cancelado'" class="text-center">
+                        <a class="iq-icons-list" href="#" target="_self">
+                          <div class="icon" style="color: black">
+                            <i class="fa fa-ban"></i> <!-- Usando FontAwesome icon para Cancelado -->
+                          </div>
+                          <span style="color: black" class="text-sm">Cancelado</span>
+                        </a>
+                      </div>
+                      <div
+                        v-else
+                        class="col-12 col-md-6 col-lg-3"
+                      >
+                        {{ solicitud.estatus }}
+                      </div>
+                    </td>
+                    <td class="text-sm">{{ solicitud.comentarios }}</td>
+                    <td class="text-sm">
+                      {{
+                        formatearFecha(solicitud.fecha_aprobacion)
+                      }}
+                    </td>
+                    <td>
+                      <a href="#" class="edit" title="">
+                        <button 
+                          class="btn btn-warning btn-sm text-sm"
+                          @click.prevent="editBtn(solicitud.id)"
+                        >
+                          Edita
+                        </button>
+                      </a>
+                      <a href="#" class="edit" title="">
+                        <button
+                          class="btn btn-danger btn-sm"
+                          @click.prevent="
+                            deleteSolicitud(solicitud.id)
+                          "
+                        >
+                          Elimina
+                        </button>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+                
+            </table>
 
+            </div>
+
+
+          </div>
+    
+          
+    
+                                <!-- Edicion de la Solicitudes -->
+          <div class="col-md-11">
+            <div v-if=" Object.keys(this.currentSolicitud).length !== 0
+            "
+          >
+            <h2 class="alert alert-warning" role="alert">
+              Actualiza Solicitud
+            </h2>
+      
+            <form
+              @submit.prevent="
+                updateSolicitud(currentSolicitud.id)
+              "
+            >
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label float-left ml-2"
+                      >Servicio</label
+                    >
+                    <select
+                      class="form-control"
+                      v-model="
+                        currentSolicitud.servicio_paciente
+                      "
+                    >
+                    <option class="text-sm" value="1">Urgencias</option>
+                    <option class="text-sm" value="2">Consulta Externa</option>
+                    <option class="text-sm" value="3">Hospitalización</option>
+                    <option class="text-sm" value="4">Cirugia</option>
+                    <option class="text-sm" value="5">Laboratorio Clínico</option>
+                    <option class="text-sm" value="6">Radiología</option>
+                    <option class="text-sm" value="7">Farmacia</option>
+                    <option class="text-sm" value="8">Rehabilitación</option>
+                    <option class="text-sm" value="9">Cuidados Intensivos</option>
+                    <option class="text-sm" value="10">Atención Pediática</option>
+                    <option class="text-sm" value="11">Atencion Materno-Infantil</option>
+                    <option class="text-sm" value="12">Atencion Geriatrica</option>
+                    <option class="text-sm" value="13">Psiquiatria y Salud Mental</option>
+                    <option class="text-sm" value="14">Banco de Sangre</option>
+                    <option class="text-sm" value="15">Ginecologia y Obstetricia</option>
+                    <option class="text-sm" value="16">Quirofano</option>
+                    <option class="text-sm" value="17">Tanatologia</option>
+                    <option class="text-sm" value="18">Infectología</option>
+                    <option class="text-sm" value="19">Cardiología</option>
+                    <option class="text-sm" value="20">Neurología</option>
+                    <option class="text-sm" value="21">Endocrinología</option>
+                    <option class="text-sm" value="22">Oftamología</option>
+                    <option class="text-sm" value="23">Otorrinología</option>
+                    <option class="text-sm" value="24">Gastroenterología</option>
+                    <option class="text-sm" value="25">Nefrología</option>
+                    <option class="text-sm" value="26">Dermatología</option>
+                    <option class="text-sm" value="27">Hematología</option>
+                    <option class="text-sm" value="28">Oncología</option>
+                    <option class="text-sm" value="29">Alergología e Inmunología</option>
+                    <option class="text-sm" value="30">Medicina Física y Rehabilitación</option>
+                    <option class="text-sm" value="31">Medicina Interna</option>
+                    <option class="text-sm" value="32">Medicina Preventiva y Salud Pública</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+      
               <div class="col">
                 <div class="form-group">
                   <label class="form-label float-left ml-2"
-                    >Departamento</label>
+                    >Departamento</label
+                  >
                   <select
                     class="form-control"
                     v-model="
                       currentSolicitud.departamento_solicitante
                     "
                   >
-                    <option value="1">Dirección General</option>
-                    <option value="2">Junta de Gobierno</option>
-                    <option value="3">Comiés Hospitalarios</option>
-                    <option value="4">Comiés de Transplantes</option>
-                    <option value="5">Departamento de Calidad</option>
-                    <option value="6">Autenticacion a Quejas</option>
-                    <option value="7">Seguridad paciente</option>
-                    <option value="8">Programacion Quirurgica</option>
-                    <option value="9">Sub - Dirección Medica</option>
-                    <option value="10">Sub - Administrativa</option>
-                    <option value="11">División de Medicina Interna</option>
-                    <option value="12">División de Pediatía</option>
-                    <option value="13">Servicio de Traumatología</option>
-                    <option value="14">División de Cirugía</option>
-                    <option value="15">Servicio de Urgencias Adultos</option>
-                    <option value="16">Terapia Intensiva</option>
-                    <option value="17">Quirófano y Anestesiología</option>
-                    <option value="18">Terapia Intermedia</option>
-                    <option value="19">Servicio de Urgencias Pediátricas</option>
-                    <option value="20">Centro de Mezclas</option>
-                    <option value="21">Radiología e imagen</option>
-                    <option value="22">Genética</option>
-                    <option value="23">Laboratorio de Análisis Clinicos</option>
-                    <option value="24">Hemodialisis</option>
-                    <option value="25">Laboratorio de Patología</option>
-                    <option value="26">Rehabilitación Pulmonar</option>
-                    <option value="27">Medicina Genómica</option>
-                    <option value="28">Banco de Sangre</option>
-                    <option value="29">Laboratorio Histocompatibilidad</option>
-                    <option value="30">Aféresis</option>
-                    <option value="31">Tele-Robotica</option>
-                    <option value="32">Jefatura de Enseñanza Médica</option>
-                    <option value="33">Ética e Investigación</option>
-                    <option value="34">Consulta Externa</option>
-                    <option value="35">Terapia y Rehabilitacion Fisica</option>
-                    <option value="36">Medicina Legal</option>
-                    <option value="37">Trabajo Social</option>
-                    <option value="38">UVEH</option>
-                    <option value="39">CIES</option>
-                    <option value="40">Comunicacion Social</option>
-                    <option value="41">Violencia Intrafamiliar</option>
-                    <option value="42">Jefatura de Enfermeria</option>
-                    <option value="43">Sub-Jefatura de Enfermeria</option>
-                    <option value="44">Supervisoras de Turno</option>
-                    <option value="45">Coordinación Enseñanza Enfermeria</option>
-                    <option value="46">Jefas de Servicio</option>
-                    <option value="47">Clinicas y Programas</option>
-                    <option value="48">Recursos Humanos</option>
-                    <option value="49">Dietética</option>
-                    <option value="50">Farmacia Intrahospitalaria</option>
-                    <option value="51">Coordinación de Asuntos Jurídicos y Administrativos</option>
-                    <option value="52">Biomédica, Conservación y Mantenimiento</option>
-                    <option value="53">Validación</option>
-                    <option value="54">Recursos Materiales</option>
-                    <option value="55">Servicios Generales</option>
-                    <option value="56">Recursos Financieros</option>
-                    <option value="57">Departamento Adtvo. Hemodinamia</option>
-                    <option value="58">Relaciones Públicas</option>
-                    <option value="59">Farmacia HGC Seguro Popular</option>
-                    <option value="60">Enlace Administrativo</option>
-                    <option value="61">Informatica</option>
-                    <option value="62">Registros Médicos</option>
-                    <option value="63">Archivo y Correspondencia</option>
-                    <option value="64">Vigilancia</option>
-                    <option value="65">Almacen</option>
-                    <option value="66">Insumos Especializados</option>
-                    <option value="67">Intendencia</option>
-                    <option value="68">Ropería</option>
-                    <option value="69">Nivel 7</option>
-                    <option value="70">Control Gastos Catastroficos</option>
-                    <option value="71">Tecnologia en la Salud</option>
+                  <option value="1">Dirección General</option>
+                  <option value="2">Junta de Gobierno</option>
+                  <option value="3">Comiés Hospitalarios</option>
+                  <option value="4">Comiés de Transplantes</option>
+                  <option value="5">Departamento de Calidad</option>
+                  <option value="6">Autenticacion a Quejas</option>
+                  <option value="7">Seguridad paciente</option>
+                  <option value="8">Programacion Quirurgica</option>
+                  <option value="9">Sub - Dirección Medica</option>
+                  <option value="10">Sub - Administrativa</option>
+                  <option value="11">División de Medicina Interna</option>
+                  <option value="12">División de Pediatía</option>
+                  <option value="13">Servicio de Traumatología</option>
+                  <option value="14">División de Cirugía</option>
+                  <option value="15">Servicio de Urgencias Adultos</option>
+                  <option value="16">Terapia Intensiva</option>
+                  <option value="17">Quirófano y Anestesiología</option>
+                  <option value="18">Terapia Intermedia</option>
+                  <option value="19">Servicio de Urgencias Pediátricas</option>
+                  <option value="20">Centro de Mezclas</option>
+                  <option value="21">Radiología e imagen</option>
+                  <option value="22">Genética</option>
+                  <option value="23">Laboratorio de Análisis Clinicos</option>
+                  <option value="24">Hemodialisis</option>
+                  <option value="25">Laboratorio de Patología</option>
+                  <option value="26">Rehabilitación Pulmonar</option>
+                  <option value="27">Medicina Genómica</option>
+                  <option value="28">Banco de Sangre</option>
+                  <option value="29">Laboratorio Histocompatibilidad</option>
+                  <option value="30">Aféresis</option>
+                  <option value="31">Tele-Robotica</option>
+                  <option value="32">Jefatura de Enseñanza Médica</option>
+                  <option value="33">Ética e Investigación</option>
+                  <option value="34">Consulta Externa</option>
+                  <option value="35">Terapia y Rehabilitacion Fisica</option>
+                  <option value="36">Medicina Legal</option>
+                  <option value="37">Trabajo Social</option>
+                  <option value="38">UVEH</option>
+                  <option value="39">CIES</option>
+                  <option value="40">Comunicacion Social</option>
+                  <option value="41">Violencia Intrafamiliar</option>
+                  <option value="42">Jefatura de Enfermeria</option>
+                  <option value="43">Sub-Jefatura de Enfermeria</option>
+                  <option value="44">Supervisoras de Turno</option>
+                  <option value="45">Coordinación Enseñanza Enfermeria</option>
+                  <option value="46">Jefas de Servicio</option>
+                  <option value="47">Clinicas y Programas</option>
+                  <option value="48">Recursos Humanos</option>
+                  <option value="49">Dietética</option>
+                  <option value="50">Farmacia Intrahospitalaria</option>
+                  <option value="51">Coordinación de Asuntos Jurídicos y Administrativos</option>
+                  <option value="52">Biomédica, Conservación y Mantenimiento</option>
+                  <option value="53">Validación</option>
+                  <option value="54">Recursos Materiales</option>
+                  <option value="55">Servicios Generales</option>
+                  <option value="56">Recursos Financieros</option>
+                  <option value="57">Departamento Adtvo. Hemodinamia</option>
+                  <option value="58">Relaciones Públicas</option>
+                  <option value="59">Farmacia HGC Seguro Popular</option>
+                  <option value="60">Enlace Administrativo</option>
+                  <option value="61">Informatica</option>
+                  <option value="62">Registros Médicos</option>
+                  <option value="63">Archivo y Correspondencia</option>
+                  <option value="64">Vigilancia</option>
+                  <option value="65">Almacen</option>
+                  <option value="66">Insumos Especializados</option>
+                  <option value="67">Intendencia</option>
+                  <option value="68">Ropería</option>
+                  <option value="69">Nivel 7</option>
+                  <option value="70">Control Gastos Catastroficos</option>
+                  <option value="71">Tecnologia en la Salud</option>
                   </select>
                 </div>
               </div>
-            </div>
-
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label class="form-label float-left ml-2"
-                    >Fecha de Solicitud</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="currentSolicitud.fecha_solicitud"
-                  />
+              
+      
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label float-left ml-2"
+                      >Fecha de Solicitud</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="currentSolicitud.fecha_solicitud"
+                    />
+                  </div>
                 </div>
               </div>
-
+    
               <div class="col">
                 <div class="form-group">
                   <label class="form-label float-left ml-2"
@@ -1372,33 +1333,29 @@
                     v-model="currentSolicitud.estatus"
                   >
                     <option value="Aprobado">Aprobado</option>
-                    <option value="En Proceso">
-                      En Proceso
-                    </option>
-                    <option value="No Aprobado">
-                      No Aprobado
-                    </option>
-                    <option value="Cancelado">
-                      Cancelado
-                    </option>
+                    <option value="En Proceso">En Proceso</option>
+                    <option value="No Aprobado">No Aprobado</option>
+                    <option value="Cancelado">Cancelado</option>
                   </select>
                 </div>
               </div>
-            </div>
-
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label class="form-label float-left ml-2"
-                    >Comentario</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="currentSolicitud.comentarios"
-                  />
+              
+      
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label float-left ml-2"
+                      >Comentario</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="currentSolicitud.comentarios"
+                    />
+                  </div>
                 </div>
               </div>
+
               <div class="col">
                 <div class="form-group">
                   <label class="form-label float-left ml-2"
@@ -1413,238 +1370,243 @@
                   />
                 </div>
               </div>
+              <br>
+      
+              <button
+                type="submit"
+                class="btn btn-success float-left ml-2"
+              >
+                Actualzar
+              </button>
+            </form>
+          </div>
+      
+            
+      
+                              <!-- Crear Solicitud  -->
+      
+            <div v-else>
+              <h2 class="alert alert-success">Crea Solicitud</h2>
+              <form @submit.prevent="saveSolicitud()">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="form-label float-left ml-2"
+                        >Servicio</label
+                      >
+                      <select
+                        class="form-control"
+                        v-model="solicitud.servicio_paciente"
+                        required
+                      >
+                        <option value="1">Urgencias</option>
+                        <option value="2">Consulta Externa</option>
+                        <option value="3">Hospitalización</option>
+                        <option value="4">Cirugia</option>
+                        <option value="5">Laboratorio Clínico</option>
+                        <option value="6">Radiología</option>
+                        <option value="7">Farmacia</option>
+                        <option value="8">Rehabilitación</option>
+                        <option value="9">Cuidados Intensivos</option>
+                        <option value="10">Atención Pediática</option>
+                        <option value="11">Atencion Materno-Infantil</option>
+                        <option value="12">Atencion Geriatrica</option>
+                        <option value="13">Psiquiatria y Salud Mental</option>
+                        <option value="14">Banco de Sangre</option>
+                        <option value="15">Ginecologia y Obstetricia</option>
+                        <option value="16">Quirofano</option>
+                        <option value="17">Tanatologia</option>
+                        <option value="18">Infectología</option>
+                        <option value="19">Cardiología</option>
+                        <option value="20">Neurología</option>
+                        <option value="21">Endocrinología</option>
+                        <option value="22">Oftamología</option>
+                        <option value="23">Otorrinología</option>
+                        <option value="24">Gastroenterología</option>
+                        <option value="25">Nefrología</option>
+                        <option value="26">Dermatología</option>
+                        <option value="27">Hematología</option>
+                        <option value="28">Oncología</option>
+                        <option value="29">Alergología e Inmunología</option>
+                        <option value="30">Medicina Física y Rehabilitación</option>
+                        <option value="31">Medicina Interna</option>
+                        <option value="32">Medicina Preventiva y Salud Pública</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="form-label float-left ml-2"
+                        >Departamento</label
+                      >
+                      <select
+                      class="form-control"
+                      v-model="
+                        solicitud.departamento_solicitante
+                      "
+                      required
+                    >
+                      <option value="1">Dirección General</option>
+                      <option value="2">Junta de Gobierno</option>
+                      <option value="3">Comiés Hospitalarios</option>
+                      <option value="4">Comiés de Transplantes</option>
+                      <option value="5">Departamento de Calidad</option>
+                      <option value="6">Autenticacion a Quejas</option>
+                      <option value="7">Seguridad paciente</option>
+                      <option value="8">Programacion Quirurgica</option>
+                      <option value="9">Sub - Dirección Medica</option>
+                      <option value="10">Sub - Administrativa</option>
+                      <option value="11">División de Medicina Interna</option>
+                      <option value="12">División de Pediatía</option>
+                      <option value="13">Servicio de Traumatología</option>
+                      <option value="14">División de Cirugía</option>
+                      <option value="15">Servicio de Urgencias Adultos</option>
+                      <option value="16">Terapia Intensiva</option>
+                      <option value="17">Quirófano y Anestesiología</option>
+                      <option value="18">Terapia Intermedia</option>
+                      <option value="19">Servicio de Urgencias Pediátricas</option>
+                      <option value="20">Centro de Mezclas</option>
+                      <option value="21">Radiología e imagen</option>
+                      <option value="22">Genética</option>
+                      <option value="23">Laboratorio de Análisis Clinicos</option>
+                      <option value="24">Hemodialisis</option>
+                      <option value="25">Laboratorio de Patología</option>
+                      <option value="26">Rehabilitación Pulmonar</option>
+                      <option value="27">Medicina Genómica</option>
+                      <option value="28">Banco de Sangre</option>
+                      <option value="29">Laboratorio Histocompatibilidad</option>
+                      <option value="30">Aféresis</option>
+                      <option value="31">Tele-Robotica</option>
+                      <option value="32">Jefatura de Enseñanza Médica</option>
+                      <option value="33">Ética e Investigación</option>
+                      <option value="34">Consulta Externa</option>
+                      <option value="35">Terapia y Rehabilitacion Fisica</option>
+                      <option value="36">Medicina Legal</option>
+                      <option value="37">Trabajo Social</option>
+                      <option value="38">UVEH</option>
+                      <option value="39">CIES</option>
+                      <option value="40">Comunicacion Social</option>
+                      <option value="41">Violencia Intrafamiliar</option>
+                      <option value="42">Jefatura de Enfermeria</option>
+                      <option value="43">Sub-Jefatura de Enfermeria</option>
+                      <option value="44">Supervisoras de Turno</option>
+                      <option value="45">Coordinación Enseñanza Enfermeria</option>
+                      <option value="46">Jefas de Servicio</option>
+                      <option value="47">Clinicas y Programas</option>
+                      <option value="48">Recursos Humanos</option>
+                      <option value="49">Dietética</option>
+                      <option value="50">Farmacia Intrahospitalaria</option>
+                      <option value="51">Coordinación de Asuntos Jurídicos y Administrativos</option>
+                      <option value="52">Biomédica, Conservación y Mantenimiento</option>
+                      <option value="53">Validación</option>
+                      <option value="54">Recursos Materiales</option>
+                      <option value="55">Servicios Generales</option>
+                      <option value="56">Recursos Financieros</option>
+                      <option value="57">Departamento Adtvo. Hemodinamia</option>
+                      <option value="58">Relaciones Públicas</option>
+                      <option value="59">Farmacia HGC Seguro Popular</option>
+                      <option value="60">Enlace Administrativo</option>
+                      <option value="61">Informatica</option>
+                      <option value="62">Registros Médicos</option>
+                      <option value="63">Archivo y Correspondencia</option>
+                      <option value="64">Vigilancia</option>
+                      <option value="65">Almacen</option>
+                      <option value="66">Insumos Especializados</option>
+                      <option value="67">Intendencia</option>
+                      <option value="68">Ropería</option>
+                      <option value="69">Nivel 7</option>
+                      <option value="70">Control Gastos Catastroficos</option>
+                      <option value="71">Tecnologia en la Salud</option>
+                    </select>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="form-label float-left ml-2"
+                        >Fecha de Solicitud</label
+                      >
+                      <input
+                        type="datetime-local"
+                        class="form-control"
+                        v-model="solicitud.fecha_solicitud"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="form-label float-left ml-2"
+                        >Estatus</label
+                      >
+                      <select
+                        class="form-control"
+                        v-model="solicitud.estatus"
+                        required
+                      >
+                        <option value="Aprobado">Aprobado</option>
+                        <option value="En Proceso">En Proceso</option>
+                        <option value="No Aprobado">No Aprobado</option>
+                        <option value="Cancelado">Cancelado</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="form-label float-left ml-2"
+                        >Comentario</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="solicitud.comentarios"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="form-label float-left ml-2"
+                        >Fecha de Aprobacion</label
+                      >
+                      <input
+                        type="datetime-local"
+                        class="form-control"
+                        v-model="solicitud.fecha_aprobacion"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <button
+                  type="submit"
+                  class="btn btn-primary float-left ml-2"
+                >
+                  Guardar
+                </button>
+              </form>
             </div>
+          </div>
 
-            <button type="submit" class="btn btn-success float-left ml-2">
-              Actualzar
-            </button>
-          </form>
         </div>
+      </b-col>
+    </b-row>
 
-        
 
-                          <!-- Crear Solicitud  -->
-        <div v-else>
-          <h2 class="alert alert-success">Crea Solicitud</h2>
-          <form @submit.prevent="saveSolicitud()">
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label class="form-label float-left ml-2"
-                    >Servicio</label
-                  >
-                  <select
-                    class="form-control"
-                    v-model="solicitud.servicio_paciente"
-                    required
-                  >
-                    <option value="1">Urgencias</option>
-                    <option value="2">Consulta Externa</option>
-                    <option value="3">Hospitalización</option>
-                    <option value="4">Cirugia</option>
-                    <option value="5">Laboratorio Clínico</option>
-                    <option value="6">Radiología</option>
-                    <option value="7">Farmacia</option>
-                    <option value="8">Rehabilitación</option>
-                    <option value="9">Cuidados Intensivos</option>
-                    <option value="10">Atención Pediática</option>
-                    <option value="11">Atencion Materno-Infantil</option>
-                    <option value="12">Atencion Geriatrica</option>
-                    <option value="13">Psiquiatria y Salud Mental</option>
-                    <option value="14">Banco de Sangre</option>
-                    <option value="15">Ginecologia y Obstetricia</option>
-                    <option value="16">Quirofano</option>
-                    <option value="17">Tanatologia</option>
-                    <option value="18">Infectología</option>
-                    <option value="19">Cardiología</option>
-                    <option value="20">Neurología</option>
-                    <option value="21">Endocrinología</option>
-                    <option value="22">Oftamología</option>
-                    <option value="23">Otorrinología</option>
-                    <option value="24">Gastroenterología</option>
-                    <option value="25">Nefrología</option>
-                    <option value="26">Dermatología</option>
-                    <option value="27">Hematología</option>
-                    <option value="28">Oncología</option>
-                    <option value="29">Alergología e Inmunología</option>
-                    <option value="30">Medicina Física y Rehabilitación</option>
-                    <option value="31">Medicina Interna</option>
-                    <option value="32">Medicina Preventiva y Salud Pública
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label class="form-label float-left ml-2"
-                    >Departamento</label
-                  >
-                  <select
-                    class="form-control"
-                    v-model="
-                      solicitud.departamento_solicitante
-                    "
-                    required
-                  >
-                    <option value="1">Dirección General</option>
-                    <option value="2">Junta de Gobierno</option>
-                    <option value="3">Comiés Hospitalarios</option>
-                    <option value="4">Comiés de Transplantes</option>
-                    <option value="5">Departamento de Calidad</option>
-                    <option value="6">Autenticacion a Quejas</option>
-                    <option value="7">Seguridad paciente</option>
-                    <option value="8">Programacion Quirurgica</option>
-                    <option value="9">Sub - Dirección Medica</option>
-                    <option value="10">Sub - Administrativa</option>
-                    <option value="11">División de Medicina Interna</option>
-                    <option value="12">División de Pediatía</option>
-                    <option value="13">Servicio de Traumatología</option>
-                    <option value="14">División de Cirugía</option>
-                    <option value="15">Servicio de Urgencias Adultos</option>
-                    <option value="16">Terapia Intensiva</option>
-                    <option value="17">Quirófano y Anestesiología</option>
-                    <option value="18">Terapia Intermedia</option>
-                    <option value="19">Servicio de Urgencias Pediátricas</option>
-                    <option value="20">Centro de Mezclas</option>
-                    <option value="21">Radiología e imagen</option>
-                    <option value="22">Genética</option>
-                    <option value="23">Laboratorio de Análisis Clinicos</option>
-                    <option value="24">Hemodialisis</option>
-                    <option value="25">Laboratorio de Patología</option>
-                    <option value="26">Rehabilitación Pulmonar</option>
-                    <option value="27">Medicina Genómica</option>
-                    <option value="28">Banco de Sangre</option>
-                    <option value="29">Laboratorio Histocompatibilidad</option>
-                    <option value="30">Aféresis</option>
-                    <option value="31">Tele-Robotica</option>
-                    <option value="32">Jefatura de Enseñanza Médica</option>
-                    <option value="33">Ética e Investigación</option>
-                    <option value="34">Consulta Externa</option>
-                    <option value="35">Terapia y Rehabilitacion Fisica</option>
-                    <option value="36">Medicina Legal</option>
-                    <option value="37">Trabajo Social</option>
-                    <option value="38">UVEH</option>
-                    <option value="39">CIES</option>
-                    <option value="40">Comunicacion Social</option>
-                    <option value="41">Violencia Intrafamiliar</option>
-                    <option value="42">Jefatura de Enfermeria</option>
-                    <option value="43">Sub-Jefatura de Enfermeria</option>
-                    <option value="44">Supervisoras de Turno</option>
-                    <option value="45">Coordinación Enseñanza Enfermeria</option>
-                    <option value="46">Jefas de Servicio</option>
-                    <option value="47">Clinicas y Programas</option>
-                    <option value="48">Recursos Humanos</option>
-                    <option value="49">Dietética</option>
-                    <option value="50">Farmacia Intrahospitalaria</option>
-                    <option value="51">Coordinación de Asuntos Jurídicos y Administrativos</option>
-                    <option value="52">Biomédica, Conservación y Mantenimiento</option>
-                    <option value="53">Validación</option>
-                    <option value="54">Recursos Materiales</option>
-                    <option value="55">Servicios Generales</option>
-                    <option value="56">Recursos Financieros</option>
-                    <option value="57">Departamento Adtvo. Hemodinamia</option>
-                    <option value="58">Relaciones Públicas</option>
-                    <option value="59">Farmacia HGC Seguro Popular</option>
-                    <option value="60">Enlace Administrativo</option>
-                    <option value="61">Informatica</option>
-                    <option value="62">Registros Médicos</option>
-                    <option value="63">Archivo y Correspondencia</option>
-                    <option value="64">Vigilancia</option>
-                    <option value="65">Almacen</option>
-                    <option value="66">Insumos Especializados</option>
-                    <option value="67">Intendencia</option>
-                    <option value="68">Ropería</option>
-                    <option value="69">Nivel 7</option>
-                    <option value="70">Control Gastos Catastroficos</option>
-                    <option value="71">Tecnologia en la Salud</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label class="form-label float-left ml-2"
-                    >Fecha de Solicitud</label
-                  >
-                  <input
-                    type="datetime-local"
-                    class="form-control"
-                    v-model="solicitud.fecha_solicitud"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label class="form-label float-left ml-2"
-                    >Estatus</label
-                  >
-                  <select
-                    class="form-control"
-                    v-model="solicitud.estatus"
-                    required
-                  >
-                    <option value="Aprobado">Aprobado</option>
-                    <option value="En Proceso">
-                      En Proceso
-                    </option>
-                    <option value="No Aprobado">
-                      No Aprobado
-                    </option>
-                    <option value="Cancelado">
-                      Cancelado
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label class="form-label float-left ml-2"
-                    >Comentario</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="solicitud.comentarios"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label class="form-label float-left ml-2"
-                    >Fecha de Aprobacion</label
-                  >
-                  <input
-                    type="datetime-local"
-                    class="form-control"
-                    v-model="solicitud.fecha_aprobacion"
-                  />
-                </div>
-              </div>
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary float-left ml-2">
-              Guardar
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
 
     <div class="pagination">
         <button class="btn btn-primary" @click="previousPage" :disabled="currentPage === 1">
@@ -1657,81 +1619,83 @@
     </div>
 
     <br>
-
-    <div class="container py-3">
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <div class="bg-white shadow rounded overflow-hidden p-2 hover-zoom">
-            <div class="rounded text-center">
-              <img
-                src="../assets/img/imagenes-direccionGeneral/servicioshospitalarios.jpg"
-                alt="Estructura Organica Hospitalaria"
-                class="mx-auto d-block"
-                style="width: 390px; height: auto;"
-              >
-              <h4 class="my-2">Estructura Organica del Hospital</h4>
-            </div>
-            <div class="text-center">
-              <button
-                class="btn btn-primary"
-                onclick="window.location.href='/estrucutura-organica-hospital'"
-              >
-                Conoce Más
-              </button>
-            </div>
-          </div>
-        </div>
-    
-        <div class="col-md-4 mb-4">
-          <div class="bg-white shadow rounded overflow-hidden p-2 hover-zoom">
-            <div class="rounded text-center">
-              <img
-                src="../assets/img/imagenes-direccionGeneral/serviciosHospitalarios (2).jpg"
-                alt="Estructura Organica Hospitalaria"
-                class="mx-auto d-block"
-                style="width: 300px; height: auto;"
-              >
-              <h4 class="my-2">Estructura Organica del Hospital</h4>
-            </div>
-            <div class="text-center">
-              <button
-                class="btn btn-primary"
-                onclick="window.location.href='/estrucutura-organica-hospital'"
-              >
-                Conoce Más
-              </button>
+  
+      <div class="container py-3">
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="bg-white shadow rounded overflow-hidden p-2 hover-zoom">
+              <div class="rounded text-center">
+                <img
+                  src="../assets/img/imagenes-direccionGeneral/servicioshospitalarios.jpg"
+                  alt="Estructura Organica Hospitalaria"
+                  class="mx-auto d-block"
+                  style="width: 390px; height: auto;"
+                >
+                <h4 class="my-2">Estructura Organica del Hospital</h4>
+              </div>
+              <div class="text-center">
+                <button
+                  class="btn btn-primary"
+                  onclick="window.location.href='/estrucutura-organica-hospital'"
+                >
+                  Conoce Más
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-    
-        <div class="col-md-4 mb-4">
-          <div class="bg-white shadow rounded overflow-hidden p-2 hover-zoom">
-            <div class="rounded text-center">
-              <img
-                src="../assets/img/imagenes-direccionGeneral/EstadisitcasMedicas.jpg"
-                alt="Estructura Organica Hospitalaria"
-                class="mx-auto d-block"
-                style="width: 290px; height: auto;"
-              >
-              <h4 class="my-2">Estadisticas del Hospital</h4>
+      
+          <div class="col-md-4 mb-4">
+            <div class="bg-white shadow rounded overflow-hidden p-2 hover-zoom">
+              <div class="rounded text-center">
+                <img
+                  src="../assets/img/imagenes-direccionGeneral/serviciosHospitalarios (2).jpg"
+                  alt="Estructura Organica Hospitalaria"
+                  class="mx-auto d-block"
+                  style="width: 300px; height: auto;"
+                >
+                <h4 class="my-2">Estructura Organica del Hospital</h4>
+              </div>
+              <div class="text-center">
+                <button
+                  class="btn btn-primary"
+                  onclick="window.location.href='/estrucutura-organica-hospital'"
+                >
+                  Conoce Más
+                </button>
+              </div>
             </div>
-            <div class="text-center">
-              <button
-                class="btn btn-primary"
-                onclick="window.location.href='/estrucutura-organica-hospital'"
-              >
-                Conoce Más
-              </button>
+          </div>
+      
+          <div class="col-md-4 mb-4">
+            <div class="bg-white shadow rounded overflow-hidden p-2 hover-zoom">
+              <div class="rounded text-center">
+                <img
+                  src="../assets/img/imagenes-direccionGeneral/EstadisitcasMedicas.jpg"
+                  alt="Estructura Organica Hospitalaria"
+                  class="mx-auto d-block"
+                  style="width: 290px; height: auto;"
+                >
+                <h4 class="my-2">Estadisticas del Hospital</h4>
+              </div>
+              <div class="text-center">
+                <button
+                  class="btn btn-primary"
+                  onclick="window.location.href='/estrucutura-organica-hospital'"
+                >
+                  Conoce Más
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    
-    
+      
+      
     
 
   </div>
+
+  
 </template>
 
 <style>
@@ -1747,15 +1711,18 @@
 <script>
 import axios from 'axios'
 
+import moment from "moment";
+
+
 const body = document.getElementsByTagName("body");
 
 export default{
-
+  name: "AprobacionServiciosHospitalarios",
     data(){
         return{
-        solicituds: [],
-        currentsolicitud: {},
-        'api': 'http://127.0.0.1:8000/api',
+        solicitudes: [],
+        currentSolicitud: {},
+        'api': 'http://127.0.0.1:8000/hospital/api',
         solicitud: {
         id: "",
         servicio_paciente: "",
@@ -1773,25 +1740,94 @@ export default{
         dateFormat: "Y-m-d",
         inline: true,
       },
+
+      chart5: {
+        series: [
+          { name: "Solcitudes Aprobadas", data: [] },
+          { name: "En proceso de aprobación", data: [] },
+          { name: "Solicitudes Negadas", data: [] },
+          { name: "Solicitudes Canceladas", data: [] },
+        ],
+
+        colors: ["#089bab", "#FC9F5B", "#FF0000", "#9b9b9b"],
+        chart: {
+          type: "bar",
+          height: 350,
+          stacked: true,
+          toolbar: {
+            show: true,
+          },
+          zoom: {
+            enabled: true,
+          },
+        },
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              legend: {
+                position: "bottom",
+                offsetX: -10,
+                offsetY: 0,
+              },
+            },
+          },
+        ],
+        plotOptions: {
+          bar: {
+            horizontal: false,
+          },
+        },
+        xaxis: {
+          type: "text",
+          categories: [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre",
+          ],
+        },
+        legend: {
+          position: "right",
+          offsetY: 40,
+        },
+        fill: {
+          opacity: 1,
+        },
+      },
+      
         }
     },
 
     mounted(){
+     body[0].classList.add("sidebar-main-menu");
      console.log('DOM is rendered')
-     console.log(Object.keys(this.currentsolicitud).length)
+     console.log(Object.keys(this.currentSolicitud).length)
      this.getVista();
+    },
+
+    unmounted() {
+    body[0].classList.remove("sidebar-main-menu");
     },
 
     created(){
      console.log('DOM is created')
-     this.getsolicituds()
+     this.getSolicitudes()
      this.getVista();
     },
 
 
     methods: {
 
-    getsolicituds(){
+    getSolicitudes(){
       axios.get(this.api + "/v1AprobacionesServicios/")
         .then((response) => {
           console.log(response.data);
@@ -1803,22 +1839,22 @@ export default{
 
 },
 
-savesolicitud(){
-      // Verifica si no se ha insertado ninguna fecha y hora en fecha_aprobacion
-      if (!this.solicitud.fecha_aprobacion) {
-        this.solicitud.fecha_aprobacion = null; // Establece fecha_aprobacion como null
-      }
-      axios.post(this.api + "/v1AprobacionesServicios/", this.solicitud)
-        .then((response) => {
-          console.log(response.data);
-          this.getSolicitudes();
-          this.solicitud = {};
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    saveSolicitud(){
+            // Verifica si no se ha insertado ninguna fecha y hora en fecha_aprobacion
+            if (!this.solicitud.fecha_aprobacion) {
+              this.solicitud.fecha_aprobacion = null; // Establece fecha_aprobacion como null
+            }
+            axios.post(this.api + "/v1AprobacionesServicios/", this.solicitud)
+              .then((response) => {
+                console.log(response.data);
+                this.getSolicitudes();
+                this.solicitud = {};
+              })
+              .catch((error) => {
+                console.log(error);
+              });
 
-},
+      },
 
 editBtn(id){
   console.log(id);
@@ -1841,7 +1877,7 @@ editBtn(id){
       });
 },
 
-updatesolicitud(id){
+updateSolicitud(id){
       // Verifica si no se ha insertado ninguna fecha y hora en fecha_aprobacion
       if (!this.currentSolicitud.fecha_aprobacion) {
         this.currentSolicitud.fecha_aprobacion = null; // Establece fecha_aprobacion como null
@@ -1940,8 +1976,15 @@ getVista() {
         return "Sin Fecha";
       }
     },
+},
 
-    paginatedData() {
+
+
+computed: {
+
+  // esta en adaptacion a la plantilla
+
+  paginatedData() {
       const startIndex = (this.currentPage - 1) * this.resultsPerPage;
       const endIndex = startIndex + this.resultsPerPage;
       return this.filteredData
@@ -1958,15 +2001,7 @@ getVista() {
       return Math.ceil(this.solicitudes.length / this.resultsPerPage);
     },
 
-},
-
-
-
-computed: {
-
-  // esta en adaptacion a la plantilla
-
-  filteredData() {
+    filteredData() {
       // Modifica la función para filtrar según el término de búsqueda
       console.log("Search input:", this.searchInput);
       return this.solicitudes.filter((solicitud) => {
@@ -2324,10 +2359,6 @@ computed: {
     },
   
 },
-
-
-
-
 
 }
 </script>
