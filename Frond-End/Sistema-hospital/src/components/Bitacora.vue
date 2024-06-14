@@ -5,14 +5,13 @@
         <h1 style="text-align: center; font-size: 30px">
           Bitácora de Dirección del Hospital
         </h1>
-
+        <br>
         <b-row sm="12">
           <div style="margin-left: auto; margin-right: auto; max-width: 1200px">
             <div class="d-flex flex-wrap justify-content-between">
               <!-- Utilizamos flex-wrap y justify-content-center para centrar los elementos y permitir que se envuelvan en pantallas más pequeñas -->
-              <b-col
-                md="6"
-                lg="3"
+              <div
+              class="md:w-1/2 lg:w-1/4 p-4"
                 v-for="(category, index) in categories"
                 :key="index"
               >
@@ -33,16 +32,13 @@
                         </h3>
                       </div>
                       <div
-                        :class="
-                          'rounded-circle div-icon ' + category.iconBg
-                        "
-                      >
+                        :class="'w-16 h-16 rounded-full flex items-center justify-center ' + category.iconBg">
                         <i :class="category.icon"></i>
-                      </div>
+                    </div>
                     </div>
                   </div>
                 </div>
-              </b-col>
+              </div>
             </div>
           </div>
         </b-row>
@@ -70,34 +66,37 @@
               </div> -->
 
             <!-- --------------------------------------------------------- -->
-            <nav class="navbar navbar-expand-lg navbar-light p-0">
-              <div class="iq-search-bar">
-                <form action="#" class="searchbox">
-                  <input
-                    type="text"
-                    class="text search-input"
-                    title="searchField"
-                    placeholder="Buscar"
-                    v-model="searchInput"
-                  />
-                  <a class="search-link" href="#"
-                    ><i class="ri-search-line"></i
-                  ></a>
-                </form>
-              </div>
-              <b-navbar-toggle target="nav">
-                <i class="ri-menu-3-line"></i>
-              </b-navbar-toggle>
-              <div class="iq-menu-bt align-self-center">
-                <div class="wrapper-menu" @click="miniSidebar">
-                  <div class="main-circle"><i class="ri-more-fill"></i></div>
-                  <div class="hover-circle"><i class="ri-more-2-fill"></i></div>
+            <nav class="flex items-center justify-between bg-white p-4 shadow-md">
+              <div class="flex items-center">
+                <div class="relative w-full lg:w-100">
+                  <form action="#" class="flex items-center w-full">
+                    <input
+                      type="text"
+                      class="border border-gray-300 rounded-full pl-4 pr-12 py-2 bg-gray-50 focus:outline-none focus:border-blue-500 w-full placeholder-gray-500"
+                      title="searchField"
+                      placeholder="Buscar"
+                      v-model="searchInput"
+                    />
+                    <button class="absolute right-0 mr-3 text-gray-500 hover:text-gray-700">
+                      <i class="ri-search-line"></i>
+                    </button>
+                  </form>
                 </div>
               </div>
-              <b-collapse id="nav-collapse" is-nav>
-                <slot name="responsiveRight" />
-              </b-collapse>
-              <slot name="right" />
+              <div class="flex items-center">
+                <button @click="miniSidebar" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 focus:outline-none">
+                  <i class="ri-more-fill"></i>
+                </button>
+                <button class="ml-4 lg:hidden focus:outline-none" @click="toggleNav">
+                  <i class="ri-menu-3-line text-xl"></i>
+                </button>
+                <div class="hidden lg:flex items-center ml-4">
+                  <slot name="responsiveRight" />
+                </div>
+                <div class="hidden lg:flex items-center ml-4">
+                  <slot name="right" />
+                </div>
+              </div>
             </nav>
 
             <!-- <database-website-component :entries="dataset" :columns="dataColumns" :filter-key="searchInput">
@@ -107,70 +106,60 @@
           </div>
 
           <div>
-            <div class="table-responsive mb-5">
-              <table class="table mb-3 table-borderless table-hover">
+            <div class="overflow-x-auto mb-5">
+              <table class="min-w-full border mt-2 table mb-3 table-borderless table-hover">
                 <thead>
-                  <tr style="text-align: center">
-                    <th scope="col">N°</th>
-                    <th scope="col">Tabla</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Operación</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Fecha</th>
+                  <tr class="text-center">
+                    <th class="border px-4 py-2">N°</th>
+                    <th class="border px-4 py-2">Tabla</th>
+                    <th class="border px-4 py-2">Usuario</th>
+                    <th class="border px-4 py-2">Operación</th>
+                    <th class="border px-4 py-2">Descripción</th>
+                    <th class="border px-4 py-2">Fecha</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(bitacora, id) in paginatedData" :key="id">
-                    <td>{{ bitacora.id }}</td>
-                    <td>{{ bitacora.nombre_tabla }}</td>
-                    <td>{{ bitacora.usuario }}</td>
-                    <td>
-                      <div v-if="bitacora.operacion === 'Insert'" class="text-center">
-                        <a class="iq-icons-list" target="_self">
-                          <div class="icon" style="color: green">
-                            <i class="fas fa-plus-circle"></i>
-                          </div>
-                          <span style="color: green">Agregado</span>
+                  <tr v-for="(bitacora, id) in paginatedData" :key="id" class="text-center">
+                    <td class="border px-4 py-2">{{ bitacora.id }}</td>
+                    <td class="border px-4 py-2">{{ bitacora.nombre_tabla }}</td>
+                    <td class="border px-4 py-2">{{ bitacora.usuario }}</td>
+                    <td class="border px-4 py-2">
+                      <div v-if="bitacora.operacion === 'Insert'" class="flex flex-col items-center text-green-600">
+                        <a class="flex items-center" target="_self">
+                          <i class="fas fa-plus-circle"></i>
+                          <span class="ml-2">Agregado</span>
                         </a>
                       </div>
-                      
-                      <div v-else-if="bitacora.operacion === 'Update'" class="text-center">
-                        <a class="iq-icons-list" target="_self">
-                          <div class="icon" style="color: orange">
-                            <i class="fas fa-edit"></i>
-                          </div>
-                          <span style="color: orange">Actualizado</span>
+                      <div v-else-if="bitacora.operacion === 'Update'" class="flex flex-col items-center text-orange-600">
+                        <a class="flex items-center" target="_self">
+                          <i class="fas fa-edit"></i>
+                          <span class="ml-2">Actualizado</span>
                         </a>
                       </div>
-                      
-                      <div v-else-if="bitacora.operacion === 'Delete'" class="text-center">
-                        <a class="iq-icons-list" target="_self">
-                          <div class="icon" style="color: red">
-                            <i class="fas fa-trash"></i>
-                          </div>
-                          <span style="color: red">Eliminado</span>
+                      <div v-else-if="bitacora.operacion === 'Delete'" class="flex flex-col items-center text-red-600">
+                        <a class="flex items-center" target="_self">
+                          <i class="fas fa-trash"></i>
+                          <span class="ml-2">Eliminado</span>
                         </a>
                       </div>
-                      
-                      <div v-else-if="bitacora.operacion === 'Read'" class="text-center">
-                        <a class="iq-icons-list" href="#" target="_self">
-                          <div class="icon" style="color: black">
-                            <i class="fas fa-eye"></i>
-                          </div>
-                          <span style="color: black">Lectura</span>
+                      <div v-else-if="bitacora.operacion === 'Read'" class="flex flex-col items-center text-black">
+                        <a class="flex items-center" href="#" target="_self">
+                          <i class="fas fa-eye"></i>
+                          <span class="ml-2">Lectura</span>
                         </a>
                       </div>
-                      
                       <div v-else class="col-12 col-md-6 col-lg-3">
                         {{ bitacora.operacion }}
                       </div>
                     </td>
-                    <td>{{ formatearDescripcion(bitacora.descripcion) }}</td>
-                    <td>{{ formatearFecha(bitacora.fecha_hora) }}</td>
+                    <td class="border px-4 py-2">{{ formatearDescripcion(bitacora.descripcion) }}</td>
+                    <td class="border px-4 py-2">{{ formatearFecha(bitacora.fecha_hora) }}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
+            
+
             <div class="pagination">
               <button
                 class="btn btn-primary"

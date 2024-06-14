@@ -16,50 +16,53 @@
             <h2 class="alert alert-primary text-center">
               Lista de Solicitudes
             </h2>
-
             <!-- buscador de la tabla   -->
-            <nav class="navbar navbar-expand-lg navbar-light p-0">
-              <div class="iq-search-bar">
-                <form action="#" class="searchbox">
-                  <input
-                    type="text"
-                    class="text search-input"
-                    title="searchField"
-                    placeholder="Buscar"
-                    v-model="searchInput"
-                  />
-                </form>
-              </div>
-              <b-navbar-toggle target="nav">
-                <i class="ri-menu-3-line"></i>
-              </b-navbar-toggle>
-              <div class="iq-menu-bt align-self-center">
-                <div class="wrapper-menu" @click="miniSidebar">
-                  <div class="main-circle">
-                    <i class="ri-more-fill"></i>
-                  </div>
-                  <div class="hover-circle">
-                    <i class="ri-more-2-fill"></i>
-                  </div>
+            <nav class="flex items-center justify-between bg-white p-4 shadow-md">
+              <div class="flex items-center">
+                <div class="relative w-full lg:w-100">
+                  <form action="#" class="flex items-center w-full">
+                    <input
+                      type="text"
+                      class="border border-gray-300 rounded-full pl-4 pr-12 py-2 bg-gray-50 focus:outline-none focus:border-blue-500 w-full placeholder-gray-500"
+                      title="searchField"
+                      placeholder="Buscar"
+                      v-model="searchInput"
+                    />
+                    <button class="absolute right-0 mr-3 text-gray-500 hover:text-gray-700">
+                      <i class="ri-search-line"></i>
+                    </button>
+                  </form>
                 </div>
               </div>
-              <b-collapse id="nav-collapse" is-nav>
-                <slot name="responsiveRight" />
-              </b-collapse>
-              <slot name="right" />
+              <div class="flex items-center">
+                <button @click="miniSidebar" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 focus:outline-none">
+                  <i class="ri-more-fill"></i>
+                </button>
+                <button class="ml-4 lg:hidden focus:outline-none" @click="toggleNav">
+                  <i class="ri-menu-3-line text-xl"></i>
+                </button>
+                <div class="hidden lg:flex items-center ml-4">
+                  <slot name="responsiveRight" />
+                </div>
+                <div class="hidden lg:flex items-center ml-4">
+                  <slot name="right" />
+                </div>
+              </div>
             </nav>
+            
+            
             <div class="table-responsive">
-              <table class="table table-bordered mt-2 table-hover">
+              <table class="table mb-3 table-borderless table-hover">
                 <thead >
-                  <tr class="text-center">
-                    <th scope="col" >No°</th>
-                    <th scope="col" >Servicio Solicitado</th>
-                    <th scope="col">Departamento Solicitante</th>
-                    <th scope="col">Fecha de Solicitud</th>
-                    <th scope="col">Estatus</th>
-                    <th scope="col">Comentario</th>
-                    <th scope="col">Fecha de Aprobación</th>
-                    <th scope="col">Acciones</th>
+                  <tr class="text-center bg-gray-100">
+                    <th class="border px-4 py-2" >No°</th>
+                    <th class="border px-4 py-2">Servicio Solicitado</th>
+                    <th class="border px-4 py-2">Departamento Solicitante</th>
+                    <th class="border px-4 py-2">Fecha de Solicitud</th>
+                    <th class="border px-4 py-2">Estatus</th>
+                    <th class="border px-4 py-2">Comentario</th>
+                    <th class="border px-4 py-2">Fecha de Aprobación</th>
+                    <th class="border px-4 py-2">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -70,7 +73,7 @@
                   >
                     <td>{{ solicitud.id }}</td>
                     <td class="text-center px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      <div v-if="solicitud.servicio_paciente === 1" class="text-center">
+                      <div v-if="solicitud.servicio_paciente === 1" class="flex flex-col items-center text-green-600">
                         <img
                           class="mx-auto"
                           src="../assets/img/Servicios Medicos/1.- Urgencias.png"
@@ -1128,20 +1131,12 @@
                     </td>
                     <td>
                       <a href="#" class="edit" title="">
-                        <button 
-                          class="btn btn-warning btn-sm text-sm"
-                          @click.prevent="editBtn(solicitud.id)"
-                        >
+                        <button  class="btn btn-warning btn-sm text-sm" @click.prevent="editBtn(solicitud.id)">
                           Edita
                         </button>
                       </a>
                       <a href="#" class="edit" title="">
-                        <button
-                          class="btn btn-danger btn-sm"
-                          @click.prevent="
-                            deleteSolicitud(solicitud.id)
-                          "
-                        >
+                        <button class="btn btn-danger btn-sm" @click.prevent="deleteSolicitud(solicitud.id)">
                           Elimina
                         </button>
                       </a>

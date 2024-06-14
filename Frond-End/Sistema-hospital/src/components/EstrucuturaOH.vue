@@ -10,39 +10,23 @@
           <div style="margin-left: auto; margin-right: auto; max-width: 1200px">
             <div class="d-flex flex-wrap justify-content-between">
               <!-- Utilizamos flex-wrap y justify-content-center para centrar los elementos y permitir que se envuelvan en pantallas más pequeñas -->
-              <b-col
-                md="6"
-                lg="3"
-                v-for="(category, index) in categories"
-                :key="index"
-              >
-                <div body-class="rounded">
-                  <div >
-                    <div
-                      class="d-flex align-items-center justify-content-between"
-                    >
-                      <div class="text-center">
-                        <h4 class="mb-2 mt-2">{{ category.title }}</h4>
-                        <h3 class="mb-0 line-height">
-                          <span
-                            ><count-up
-                              :end-val="category.value"
-                              duration="5"
-                            ></count-up
-                          ></span>
-                        </h3>
-                      </div>
-                      <div
-                        :class="
-                          'rounded-circle div-icon ' + category.iconBg
-                        "
-                      >
-                        <i :class="category.icon"></i>
-                      </div>
+              <div class="md:w-1/2 lg:w-1/4 p-4" v-for="(category, index) in categories" :key="index">
+                <div class="rounded-lg shadow-lg p-4 bg-white">
+                  <div class="flex items-center justify-between">
+                    <div class="text-center">
+                      <h4 class="mb-2 mt-2 text-lg font-semibold">{{ category.title }}</h4>
+                      <h3 class="mb-0 text-2xl font-bold">
+                        <span>
+                          <count-up :end-val="category.value" duration="5"></count-up>
+                        </span>
+                      </h3>
+                    </div>
+                    <div :class="'w-16 h-16 rounded-full flex items-center justify-center ' + category.iconBg">
+                      <i :class="category.icon + ' text-3xl'"></i>
                     </div>
                   </div>
                 </div>
-              </b-col>
+              </div>
             </div>
           </div>
         </b-row>
@@ -88,36 +72,41 @@
             </div>
 
             <!-- --------------------------------------------------------- -->
-
-            <nav class="navbar navbar-expand-lg navbar-light p-0">
-              <div class="iq-search-bar">
-                <form action="#" class="searchbox">
-                  <input
-                    type="text"
-                    class="text search-input"
-                    title="searchField"
-                    placeholder="Buscar"
-                    v-model="searchInput"
-                  />
-                  <a class="search-link" href="#"
-                    ><i class="ri-search-line"></i
-                  ></a>
-                </form>
-              </div>
-              <b-navbar-toggle target="nav">
-                <i class="ri-menu-3-line"></i>
-              </b-navbar-toggle>
-              <div class="iq-menu-bt align-self-center">
-                <div class="wrapper-menu" @click="miniSidebar">
-                  <div class="main-circle"><i class="ri-more-fill"></i></div>
-                  <div class="hover-circle"><i class="ri-more-2-fill"></i></div>
+             <!-- Buscador de Palabras Clave -->
+             <nav class="flex items-center justify-between bg-white p-4 shadow-md">
+              <div class="flex items-center">
+                <div class="relative w-full lg:w-96">
+                  <form action="#" class="flex items-center w-full">
+                    <input
+                      type="text"
+                      class="border border-gray-600 rounded-full pl-4 pr-12 py-2 bg-gray-50 focus:outline-none focus:border-blue-500 w-full placeholder-gray-500"
+                      title="searchField"
+                      placeholder="Buscar"
+                      v-model="searchInput"
+                    />
+                    <button class="absolute right-0 mr-3 text-gray-500 hover:text-gray-700">
+                      <i class="ri-search-line"></i>
+                    </button>
+                  </form>
                 </div>
               </div>
-              <b-collapse id="nav-collapse" is-nav>
-                <slot name="responsiveRight" />
-              </b-collapse>
-              <slot name="right" />
+              <div class="flex items-center">
+                <button @click="miniSidebar" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 focus:outline-none">
+                  <i class="ri-more-fill"></i>
+                </button>
+                <button class="ml-4 lg:hidden focus:outline-none" @click="toggleNav">
+                  <i class="ri-menu-3-line text-xl"></i>
+                </button>
+                <div class="hidden lg:flex items-center ml-4">
+                  <slot name="responsiveRight" />
+                </div>
+                <div class="hidden lg:flex items-center ml-4">
+                  <slot name="right" />
+                </div>
+              </div>
             </nav>
+            
+            
 
             <!-- <database-website-component :entries="dataset" :columns="dataColumns" :filter-key="searchInput">
                 </database-website-component> -->
