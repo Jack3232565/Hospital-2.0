@@ -1,17 +1,19 @@
 <template>
   <Personas/>
-  
+  <Pie_pagina/>  
 </template>
 
 <script>
 import Personas from './Personas.vue'
 import Usuarios from './Usuarios.vue'
+import Pie_pagina from './Pie_pagina.vue';
 
 export default {
 
 components:{
   Personas,
-  Usuarios
+  Usuarios,
+  Pie_pagina
 },
 
 
