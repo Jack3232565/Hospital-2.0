@@ -65,13 +65,13 @@
                     <th class="py-3 px-6 text-left">Acciones</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-gray-600 text-xs font-light">
                   <tr
                     v-for="(solicitud, id) in paginatedData"
                     :key="id"
                     class="text-center"
                   >
-                    <td>{{ solicitud.id }}</td>
+                    <td class="py-3 px-6 text-left whitespace-nowrap truncate">{{ solicitud.id }}</td>
                     <td class="text-center px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       <div v-if="solicitud.servicio_paciente === 1" class="flex flex-col items-center text-green-600">
                         <img
