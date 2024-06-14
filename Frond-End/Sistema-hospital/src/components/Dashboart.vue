@@ -14,30 +14,43 @@
               Dirección General
             </a>
             <ul v-show="menus.general" class="submenu ml-8">
-              <li>
+              
+              <RouterLink to="/aprobacionSM">
+                <li>
+                    <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+                      <img src="../assets/img/Aprobacion.webp" alt="Descripción de la imagen" width="25" height="40" class="mr-2">
+                      Aprobación S. M.
+                    </a>
+                </li>
+              </RouterLink>
+              
+              <RouterLink to="/estrucuturaOr">
+                <li>
                   <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
-                    <img src="../assets/img/Aprobacion.webp" alt="Descripción de la imagen" width="25" height="40" class="mr-2">
-                    Aprobación S. M.
+                    <img src="../assets/img/Organizacion.webp" alt="Descripción de la imagen" width="25" height="40" class="mr-2">
+                    Estructura O. H.
                   </a>
-              </li>
-              <li>
-                <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
-                  <img src="../assets/img/Organizacion.webp" alt="Descripción de la imagen" width="25" height="40" class="mr-2">
-                  Estructura O. H.
-                </a>
-              </li>
-              <li>
-                <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
-                  <img src="../assets/img/Graficos.webp" alt="Descripción de la imagen" width="25" height="40" class="mr-2">
-                  Datos Estadísticos
-                </a>
-              </li>
-              <li>
-                <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
-                  <img src="../assets/img/Bitacora.webp" alt="Descripción de la imagen" width="25" height="40" class="mr-2">
-                  Bitácora
-                </a>
-              </li>
+                </li>
+              </RouterLink>
+
+              <RouterLink to="/estadisticas">
+                <li>
+                  <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+                    <img src="../assets/img/Graficos.webp" alt="Descripción de la imagen" width="25" height="40" class="mr-2">
+                    Datos Estadísticos
+                  </a>
+                </li>
+              </RouterLink>
+
+              <RouterLink to="/bitacora">
+                <li>
+                  <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+                    <img src="../assets/img/Bitacora.webp" alt="Descripción de la imagen" width="25" height="40" class="mr-2">
+                    Bitácora
+                  </a>
+                </li>
+              </RouterLink>
+
             </ul>
           </div>
           
@@ -171,7 +184,7 @@
       </div> -->
 
       <!-- importa los componentes al la vista del Dashboart -->
-      <router-view></router-view> 
+      <router-view/> 
 
 
     </div>
@@ -181,14 +194,15 @@
 
 
 <script>
-import { RouterLink } from 'vue-router';
+
+// import { RouterLink } from 'vue-router';
 
 export default {
 
-   components: {
-    RouterLink,
+  //  components: {
+  //   RouterLink,
 
-  },
+  // },
 
   data() {
     return {
