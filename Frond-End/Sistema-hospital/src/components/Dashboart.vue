@@ -184,7 +184,8 @@
       </div> -->
 
       <!-- importa los componentes al la vista del Dashboart -->
-      <router-view/> 
+      <router-view/>
+      <Pie_pagina/> 
 
 
     </div>
@@ -195,14 +196,15 @@
 
 <script>
 
-// import { RouterLink } from 'vue-router';
+import { RouterLink } from 'vue-router';
+import Pie_pagina from './Pie_pagina.vue';
 
 export default {
 
-  //  components: {
-  //   RouterLink,
-
-  // },
+    components: {
+     RouterLink,
+     Pie_pagina,
+  },
 
   data() {
     return {
