@@ -123,7 +123,7 @@
                     <td class="border px-4 py-2">{{ bitacora.id }}</td>
                     <td class="border px-4 py-2">{{ bitacora.nombre_tabla }}</td>
                     <td class="border px-4 py-2">{{ bitacora.usuario }}</td>
-                    <td class="border px-4 py-2">
+                    <td class=" ">
                       <div v-if="bitacora.operacion === 'Insert'" class="flex flex-col items-center text-green-600">
                         <a class="flex items-center" target="_self">
                           <i class="fas fa-plus-circle"></i>
