@@ -51,18 +51,18 @@
             </nav>
             
             
-            <div class="table-responsive">
-              <table class="table mb-3 table-borderless table-hover">
+            <div class="overflow-x-auto">
+              <table class="min-w-full bg-white border border-gray-300 table-hover">
                 <thead >
-                  <tr class="text-center bg-gray-100">
-                    <th class="border px-4 py-2" >No°</th>
-                    <th class="border px-4 py-2">Servicio Solicitado</th>
-                    <th class="border px-4 py-2">Departamento Solicitante</th>
-                    <th class="border px-4 py-2">Fecha de Solicitud</th>
-                    <th class="border px-4 py-2">Estatus</th>
-                    <th class="border px-4 py-2">Comentario</th>
-                    <th class="border px-4 py-2">Fecha de Aprobación</th>
-                    <th class="border px-4 py-2">Acciones</th>
+                  <tr class="bg-gray-200 text-gray-600 uppercase text-xs leading-normal">
+                    <th class="py-3 px-6 text-left" >No°</th>
+                    <th class="py-3 px-6 text-left">Servicio Solicitado</th>
+                    <th class="py-3 px-6 text-left">Departamento Solicitante</th>
+                    <th class="py-3 px-6 text-left">Fecha de Solicitud</th>
+                    <th class="py-3 px-6 text-left">Estatus</th>
+                    <th class="py-3 px-6 text-left">Comentario</th>
+                    <th class="py-3 px-6 text-left">Fecha de Aprobación</th>
+                    <th class="py-3 px-6 text-left">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
