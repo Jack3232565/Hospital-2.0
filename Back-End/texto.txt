@@ -1,0 +1,66 @@
+Pasos para python dentro del proyecto
+
+-- Crea la caprpet con MKDIR
+    EntornoVirtualApi
+
+-- Crear el entorno virtual
+    py -m venv EntornoVirtualAPI
+
+-- Selecciona el entorno virtual en el buscador con 
+
+>Python  
+busca la ruta del 
+
+-- Crear el archivo 
+ app.py
+
+-- Ejecuta el archivo con 
+py app.py
+
+-- instala las librerias 
+pip install fastapi uvicorn
+
+nota: revisar si Python esta correctamente Instalado
+para evitar problemas de instalacion de la libreria
+
+-- Dentro del archivo app.py igresa la siguinte indicaciones
+
+from fastapi import FastAPI -- se imiporta la libreria FastAPI
+
+app = FastAPI()
+print("Bienvenido a mi aplicacion")
+
+-- ejecuta el archivo app.py con
+
+py app.py 
+
+-- ejecuta uvicorn app:app
+cd
+-- En la capeta Routes creamos un nuevo archivo llamado personas.py
+
+from fastapi import APIRouter
+
+persona = APIRouter()
+@persona.get("/persona") -- Creamos la ruta personas
+
+def helloworld():
+    return
+
+
+-- En el archivo app.py importamos router.personas
+
+
+from fastapi import FastAPI 
+from routes.persona import persona -- se importa el archivo persona que viene del route
+
+app = FastAPI()
+app.iclude_router(persona)
+
+print("Bienvenido a mi aplicacion")
+
+
+activa el entorno virtual con powershell desde la ruta ubicada en la carpeta Back-End
+.\EntornoVirtualApi\Scripts\activate
+
+-- reiniciar el la app
+uvicorn app:app
