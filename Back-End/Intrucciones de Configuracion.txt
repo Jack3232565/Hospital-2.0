@@ -62,5 +62,5 @@ print("Bienvenido a mi aplicacion")
 activa el entorno virtual con powershell desde la ruta ubicada en la carpeta Back-End
 .\EntornoVirtualApi\Scripts\activate
 
--- reiniciar el la app
-uvicorn app:app
+-- reiniciar el la app para que se hagan los cambios en automatico
+uvicorn app:app --reload
