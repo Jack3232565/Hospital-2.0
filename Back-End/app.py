@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+
+
 from routes.persona import persona
 from routes.usuarios import usuario
 

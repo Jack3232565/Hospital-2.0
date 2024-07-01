@@ -64,3 +64,33 @@ activa el entorno virtual con powershell desde la ruta ubicada en la carpeta Bac
 
 -- reiniciar el la app para que se hagan los cambios en automatico
 uvicorn app:app --reload
+
+-- Se instala el mapeador de las tablas creadas en la base de datos 
+-- El comando pip install SQLAlchemy se utiliza para instalar el paquete SQLAlchemy en tu entorno de Python.
+-- SQLAlchemy es una biblioteca de SQL y ORM (Object-Relational Mapping) que facilita el trabajo con bases de datos en aplicaciones Python. 
+pip install SQLAlchemy
+
+-- PyMySQL es una biblioteca que permite a los programas de Python conectarse y interactuar con bases 
+-- de datos MySQL. Aquí hay algunas de las funcionalidades clave de PyMySQL
+pip install PyMySQL
+
+
+
+
+-- Creacion de la base de datos automatica 
+-- NOTA: No se ha realizado este paso aun 
+
+ # Instala Alembic si no está instalado
+pip install alembic
+
+# Inicializa Alembic en tu proyecto
+alembic init alembic
+
+# Configura el archivo alembic.ini con la URL de tu base de datos
+
+# Genera las migraciones basadas en los cambios del modelo
+alembic revision --autogenerate -m "Update modelos"
+
+# Aplica las migraciones a la base de datos
+alembic upgrade head y estan funcionando la base de datos con el api 
+
