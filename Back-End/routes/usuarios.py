@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field,  EmailStr
 from datetime import datetime
 from typing import Optional, List, Annotated
 
@@ -7,8 +7,6 @@ from sqlalchemy.orm import Session
 from models.database import SessionLocal  # Ajuste el import
 from models.models import Usuarios  # Ajuste el import
 
-from pydantic import BaseModel, EmailStr, Field
-from typing import Optional
 
 # Crear un enrutador para las rutas de persona
 usuario = APIRouter()

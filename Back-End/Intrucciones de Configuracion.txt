@@ -58,12 +58,15 @@ app.iclude_router(persona)
 
 print("Bienvenido a mi aplicacion")
 
+--------------------------------------------------------
+-- Activa el entorno virtual con powershell desde la ruta ubicada en la carpeta Back-End
 
-activa el entorno virtual con powershell desde la ruta ubicada en la carpeta Back-End
 .\EntornoVirtualApi\Scripts\activate
 
--- reiniciar el la app para que se hagan los cambios en automatico
+-- Reiniciar el la app para que se hagan los cambios en automatico
+
 uvicorn app:app --reload
+---------------------------------------------------------
 
 -- Se instala el mapeador de las tablas creadas en la base de datos 
 -- El comando pip install SQLAlchemy se utiliza para instalar el paquete SQLAlchemy en tu entorno de Python.
