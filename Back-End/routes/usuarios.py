@@ -1,16 +1,14 @@
 from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel, Field,  EmailStr
+from pydantic import BaseModel, Field, EmailStr
 from datetime import datetime
-from typing import Optional, List, Annotated
+from typing import Optional, List
 
 from sqlalchemy.orm import Session
 from models.database import SessionLocal  # Ajuste el import
 from models.models import Usuarios  # Ajuste el import
 
-
 # Crear un enrutador para las rutas de persona
 usuario = APIRouter()
-
 
 # Activacion y Cierra base de datos si no se usa
 def get_db():
@@ -19,11 +17,6 @@ def get_db():
         yield db
     finally:
         db.close()
-
-
-# Lista para almacenar las personas en memoria (solo para demostración)
-#usuarios = []
-
 
 class ModelUsuario(BaseModel):
     ID: int
@@ -48,24 +41,14 @@ class UpdateUsuario(BaseModel):
     Estatus: Optional[str]  # Los estatus son 'Activo', 'Inactivo', 'Bloqueado', 'Suspendido'
     Fecha_Actualizacion: Optional[datetime] = None
 
-
-@usuario.get('/')
+@usuario.get('/', operation_id="bienvenida_get")
 def bienvenida():
     """
     Ruta de bienvenida.
     """
     return 'Bienvenido al Sistema'
 
-
-# Ruta para obtener todas las personas
-# @usuario.get("/usuario", response_model=List[ModelUsuarios])
-# async def get_usuario(): 
-#     """
-#     Obtiene la lista de todas las personas.
-#     """
-#     return usuarios
-
-@usuario.get("/usuario", response_model=List[ModelUsuario])
+@usuario.get("/usuario", response_model=List[ModelUsuario], operation_id="get_usuarios")
 async def get_usuarios(db: Session = Depends(get_db)):
     """
     Obtiene la lista de todos los usuarios.
@@ -73,10 +56,7 @@ async def get_usuarios(db: Session = Depends(get_db)):
     usuarios = db.query(Usuarios).all()
     return usuarios
 
-
-
-# Ruta para guardar una nuevo usuario
-@usuario.post("/usuario", response_model=ModelUsuario)
+@usuario.post("/usuario", response_model=ModelUsuario, operation_id="save_usuario")
 async def save_usuario(datos_usuario: ModelUsuario, db: Session = Depends(get_db)):
     """
     Guarda un nuevo usuario en la base de datos.
@@ -88,10 +68,7 @@ async def save_usuario(datos_usuario: ModelUsuario, db: Session = Depends(get_db
     db.refresh(usuario)
     return usuario
 
-
-
-# Ruta para actualizar una persona existente
-@usuario.put("/usuario/{usuario_id}", response_model=ModelUsuario)
+@usuario.put("/usuario/{usuario_id}", response_model=ModelUsuario, operation_id="update_usuario")
 async def update_usuario(usuario_id: int, datos_actualizados: UpdateUsuario, db: Session = Depends(get_db)):
     """
     Actualiza los datos de un usuario existente.
@@ -107,11 +84,7 @@ async def update_usuario(usuario_id: int, datos_actualizados: UpdateUsuario, db:
     db.refresh(usuario)
     return usuario
 
-
-
-
-# Ruta para eliminar una persona existente
-@usuario.delete("/usuario/{usuario_id}")
+@usuario.delete("/usuario/{usuario_id}", operation_id="delete_usuario")
 async def delete_usuario(usuario_id: int, db: Session = Depends(get_db)):
     """
     Elimina un usuario de la base de datos.
@@ -124,10 +97,7 @@ async def delete_usuario(usuario_id: int, db: Session = Depends(get_db)):
     db.commit()
     return {"detail": "Usuario eliminado exitosamente"}
 
-
-
-# Ruta para obtener un usuario por ID
-@usuario.get("/usuario/{usuario_id}", response_model=ModelUsuario)
+@usuario.get("/usuario/{usuario_id}", response_model=ModelUsuario, operation_id="get_usuario")
 async def get_usuario(usuario_id: int, db: Session = Depends(get_db)):
     """
     Obtiene el usuario solicitado por su ID.
@@ -136,4 +106,3 @@ async def get_usuario(usuario_id: int, db: Session = Depends(get_db)):
     if not usuario:
         raise HTTPException(status_code=404, detail="Usuario no encontrado")
     return usuario
-
