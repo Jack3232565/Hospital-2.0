@@ -5,6 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 # se esta entrando en la base de datos con usuario: root y contraseña: 1234, en el puerto de conexion de MySQL 3306
 URL_DATABSE = "mysql+pymysql://root:1234@localhost:3306/usuariosbd"
 
+
 # Crear el motor de base de datos
 engine = create_engine(URL_DATABSE)
 
