@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from routes.persona import persona
 from routes.usuarios import usuario
+from routes.users import user
+from routes.persons import person
 
 
 app = FastAPI()
@@ -9,6 +11,10 @@ app = FastAPI()
 # Registrar los routers
 app.include_router(persona, tags=["Personas"])
 app.include_router(usuario, tags=["Usuarios"])
+
+
+app.include_router(user)
+app.include_router(person)
 
 # Mensaje de bienvenida usando logging
 import logging

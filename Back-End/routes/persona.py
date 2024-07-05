@@ -1,8 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from datetime import date, datetime
-from typing import Optional, List, Annotated
-
+from typing import Optional, List
 from sqlalchemy.orm import Session
 from models.database import SessionLocal  # Ajuste el import
 from models.models import Personas  # Ajuste el import
