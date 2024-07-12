@@ -39,7 +39,7 @@ class ModelPersona(BaseModel):
     class Config:
         from_attributes = True
 
-# Modelo de datos para actualizar parcialmente una Persona
+# Modelo de datos para actualizar parcialmente una Personas
 class UpdatePersona(BaseModel):
     Titulo: Optional[str] = None
     Nombre: Optional[str] = None
