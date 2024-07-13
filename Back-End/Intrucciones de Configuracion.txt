@@ -79,7 +79,6 @@ pip install PyMySQL
 
 
 
-
 -- Creacion de la base de datos automatica 
 -- NOTA: No se ha realizado este paso aun 
 
