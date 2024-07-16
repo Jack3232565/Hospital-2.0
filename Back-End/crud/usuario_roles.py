@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from models import usuario_roles as models_usuario_roles
 from schemas import usuario_roles as schemas_usuario_roles
 
+
 def get_usuario_roles(db: Session, usuario_id: int, rol_id: int):
     return db.query(models_usuario_roles.UsuarioRoles).filter(
         models_usuario_roles.UsuarioRoles.Usuario_ID == usuario_id,
