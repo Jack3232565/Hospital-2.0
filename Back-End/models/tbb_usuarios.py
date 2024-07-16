@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean, DateTime
 from config.db import Base
+from sqlalchemy.orm import relationship
 
 class tbb_usuarios(Base):
     __tablename__ = 'tbb_usuarios'
@@ -13,3 +14,5 @@ class tbb_usuarios(Base):
     Estatus = Column(Boolean, default=False)
     Fecha_Registro = Column(DateTime)
     Fecha_Actualizacion = Column(DateTime)
+
+    roles = relationship("UsuarioRoles", back_populates="usuario")
