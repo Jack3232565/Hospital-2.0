@@ -6,6 +6,7 @@ from routes.persons import person
 from routes.roles import roles
 from routes.usuario_roles import usuario_roles_router
 from routes.tbb_usuarios import tbb_usuarios_router
+from routes.tbb_aprobaciones import tbb_aprobaciones
 import logging
 
 # Importa database.py para que se ejecuten las funciones de creación de tablas
@@ -22,6 +23,7 @@ app.include_router(person)
 app.include_router(roles)
 app.include_router(tbb_usuarios_router)
 app.include_router(usuario_roles_router)
+app.include_router(tbb_aprobaciones)
 
 # Mensaje de bienvenida usando logging
 logging.basicConfig(level=logging.INFO)
