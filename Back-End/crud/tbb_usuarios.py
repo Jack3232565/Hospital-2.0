@@ -6,17 +6,19 @@ from schemas import tbb_usuarios as schemas_tbb_usuarios
 def get_tbb_usuario(db: Session, id: int):
     return db.query(models_tbb_usuarios.tbb_usuarios).filter(models_tbb_usuarios.tbb_usuarios.Persona_ID == id).first()
 
-def get_all_tbb_usuarios(db: Session, skip: int = 0, limit: int = 10):
-    return db.query(models_tbb_usuarios.tbb_usuarios).offset(skip).limit(limit).all()
+def get_tbb_usuario_by_name(db: Session, nombre: str):
+    return db.query(models_tbb_usuarios.tbb_usuarios).filter(models_tbb_usuarios.tbb_usuarios.Nombre_Usuario == nombre).first()
 
 def get_user_by_credentials(db: Session, username: str, correo: str, telefono: str, password: str):
     return db.query(models_tbb_usuarios.tbb_usuarios).filter((models_tbb_usuarios.tbb_usuarios.Nombre_Usuario == username) | 
                                                              (models_tbb_usuarios.tbb_usuarios.Correo_Electronico == correo) | 
                                                              (models_tbb_usuarios.tbb_usuarios.Numero_Telefonico_Movil == telefono), 
-                                                             models_tbb_usuarios.tbb_usuarios.Contrasena == password).firts()
+                                                             models_tbb_usuarios.tbb_usuarios.Contrasena == password).first()
 
-def get_tbb_usuario_by_name(db: Session, nombre: str):
-    return db.query(models_tbb_usuarios.tbb_usuarios).filter(models_tbb_usuarios.tbb_usuarios.Nombre_Usuario == nombre).first()
+
+def get_all_tbb_usuarios(db: Session, skip: int = 0, limit: int = 10):
+    return db.query(models_tbb_usuarios.tbb_usuarios).offset(skip).limit(limit).all()
+
 
 def create_tbb_usuario(db: Session, tbb_usuario: schemas_tbb_usuarios.tbb_usuarioCreate):
     db_usuario = models_tbb_usuarios.tbb_usuarios(

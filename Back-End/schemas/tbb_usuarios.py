@@ -32,3 +32,12 @@ class tbb_usuarioUpdate(Model_tbb_usuario):
 
 class tbb_usuario(Model_tbb_usuario):
     ID: int
+    Persona_ID: int
+    class Config:
+        from_attributes = True
+
+class UserLogin(BaseModel):
+    Nombre_Usuario: Optional[str] = None
+    Correo_Electronico: Optional[str] = None
+    Contrasena: str
+    Numero_Telefonico_Movil: Optional[str]=None

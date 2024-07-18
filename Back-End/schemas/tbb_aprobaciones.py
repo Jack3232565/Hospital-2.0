@@ -23,7 +23,7 @@ class TbbAprobacionesBase(BaseModel):
     Estatus: Estatus
     Tipo: Tipo
     Fecha_Registro: datetime
-    Fecha_Actualizacion: datetime  # Corregido el nombre
+    Fecha_Actualizacion: datetime  
 
 class TbbAprobacionesCreate(TbbAprobacionesBase):
     pass
